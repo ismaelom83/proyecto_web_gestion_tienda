@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 13-jul-2020 20:15:47 by Hibernate Tools 5.4.14.Final -->
+<hibernate-mapping>
+
+<class
+    name="proyecto_web_gestion_tienda.model.CabeceraPedido"
+    table="cabecera_pedido"
+    catalog="proyecto_web_gestion_tienda"
+    optimistic-lock="version"
+>
+
+	<id 
+        name="id"
+        type="java.lang.Integer"
+    >
+    
+<column name="id" />
+	    <generator class="identity" />
+    </id>
+
+
+
+
+    <many-to-one
+	    name="clientes"
+	    class="proyecto_web_gestion_tienda.model.Clientes"
+	    
+        fetch="select"
+    >
+<column name="id_cliente" not-null="true" />
+   </many-to-one>
+    <property
+        name="numPedido"
+	    type="int"
+    >
+<column name="num_pedido" not-null="true" />
+  </property>
+
+    <property
+        name="importeTotal"
+	    type="int"
+    >
+<column name="importe_total" not-null="true" />
+  </property>
+
+
+	<set name="detallePedidos"
+table="detalle_pedido"
+	inverse="true"
+	lazy="true"	 		
+	 fetch="select"
+	>
+		<key
+		> 
+<column name="id_pedido" not-null="true" />
+		</key>
+<one-to-many class="proyecto_web_gestion_tienda.model.DetallePedido"
+/>
+	</set>
+
+
+</class>
+
+</hibernate-mapping>

@@ -25,7 +25,7 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a><span
+                <li><a href="carrito.jsp" ><span
                         class="glyphicon glyphicon-shopping-cart"></span> Carrito</a></li>
                 <li><a href="login.jsp"><span
                         class="glyphicon glyphicon-user"></span> Login</a></li>

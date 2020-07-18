@@ -59,10 +59,10 @@
 						<div class="form-group">
 							<div class="col-md-12 control">
 								<div style="border-top: 1px solid #888; padding-top: 15px;">
-									¿Todavía no tienes una cuenta de cliente? ¡Puedes crearla ahora mismo <a
+									ï¿½Todavï¿½a no tienes una cuenta de cliente? ï¿½Puedes crearla ahora mismo <a
 										href="#"
 										onClick="$('#loginbox').hide(); $('#signupbox').show()">
-										pulsando aquí! </a>
+										pulsando aquï¿½! </a>
 								</div>
 							</div>
 						</div>

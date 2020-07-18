@@ -45,7 +45,7 @@
 							</strong>
 						</h4>
 					</div>
-					<a href="carrito.jsp" type="button" class="btn btn-lg btn-success btn-product">Añadir al Carrito</a>
+					<a href="ControllerCarrito?idProductoCarrito=${productoId.id}" type="button" class="btn btn-lg btn-success btn-product">Añadir al Carrito</a>
 					<br>
 					<br>
 					<form

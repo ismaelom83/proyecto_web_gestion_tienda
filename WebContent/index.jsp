@@ -44,7 +44,7 @@ if(listaP==null){
 			<c:forEach items="${pageScope.listaP}" var="producto">
 				<div class="col-lg-4">
 					<div class="panel panel-default panel-producto">
-					<a href="ControllerId?idProducto=<c:out value="${producto.id}"></c:out>" style="text-decoration:none;color:black;">
+					<a href="ControllerProductoId?idProducto=<c:out value="${producto.id}"></c:out>" style="text-decoration:none;color:black;">
 						<div class="panel-heading">
 							<span><c:out value="${producto.descripcion}"></c:out></span>
 						</div>

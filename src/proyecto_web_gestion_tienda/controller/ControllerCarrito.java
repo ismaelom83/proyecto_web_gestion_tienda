@@ -1,6 +1,8 @@
 package proyecto_web_gestion_tienda.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +15,8 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import proyecto_web_gestion_tienda.model.Producto;
+import proyecto_web_gestion_tienda.service.OperacionesDB;
 import proyecto_web_gestion_tienda.utils.HibernateUtil;
 
 @WebServlet("/ControllerCarrito")
@@ -35,6 +39,18 @@ public class ControllerCarrito extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		ArrayList<Producto> listaCarrito = new ArrayList<>();
+	
+			 int id = Integer.parseInt(request.getParameter("idProductoCarrito"));
+				Producto p =	OperacionesDB.buscarProductoId(session,id);
+				listaCarrito.add(p);
+				
+				request.setAttribute("productoCarritoLista", listaCarrito);
+				for (Producto producto : listaCarrito) {
+					System.out.println("producto en el for "+producto);
+				}
+				request.getRequestDispatcher("carrito.jsp").forward(request, response);
+			
 		
 	}
 

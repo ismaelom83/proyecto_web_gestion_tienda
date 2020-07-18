@@ -16,8 +16,8 @@ import org.hibernate.SessionFactory;
 import proyecto_web_gestion_tienda.model.Producto;
 import proyecto_web_gestion_tienda.service.OperacionesDB;
 import proyecto_web_gestion_tienda.utils.HibernateUtil;
-@WebServlet("/ControllerId")
-public class ControllerId extends HttpServlet {
+@WebServlet("/ControllerProductoId")
+public class ControllerProductoId extends HttpServlet {
 
 	/**
 	 * 
@@ -36,18 +36,12 @@ private static Logger logger = LogManager.getLogger(ControllerLogin.class);
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-	
-		
-	String idProducto  = request.getParameter("idProducto");
-	int id = Integer.parseInt(idProducto);
+	int id = Integer.parseInt(request.getParameter("idProducto"));
 	Producto p =	OperacionesDB.buscarProductoId(session,id);
 	System.out.println(p.getPrecioUnitarioSinIva());
 	request.setAttribute("productoId", p);
 	request.getRequestDispatcher("producto.jsp").forward(request, response);
-		
-		
-		
+				
 	}
 
 	

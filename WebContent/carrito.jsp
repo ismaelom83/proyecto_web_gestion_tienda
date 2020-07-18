@@ -1,5 +1,9 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="proyecto_web_gestion_tienda.model.Producto"%>
+<%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,10 +17,14 @@
 <body>
 
 
-<%@include file="includes/nav.jsp" %>
+	<%@include file="includes/nav.jsp"%>
 
-<div class="container">
+	<%
+		ArrayList<Producto> listaProductos = (ArrayList<Producto>) request.getAttribute("productoCarritoLista");
+	pageContext.setAttribute("listaProductos2", listaProductos);
+	%>
 
+	<div class="container">
 		<div class="row">
 			<div class="col-sm-12 col-md-10 col-md-offset-1">
 				<table class="table table-hover">
@@ -28,55 +36,44 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="col-md-10">
-								<div class="media">
-									<img
-										class="thumbnail pull-left media-object"
-										src=""
-										style="width: 150px;">									
-									<div class="media-body">
-										<h4 class="media-heading">&nbsp;
-											<span text="">Nombre del producto</span>
-										</h4>
-										<h5 class="media-heading">&nbsp;
-											by <span text="">pepe@pepe.com</span>
-										</h5>
-										
+						<c:forEach items="${pageScope.listaProductos2}" var="pro">
+							<tr>
+								<td class="col-md-10">
+									<div class="media">
+										<img class="thumbnail pull-left media-object" src="<c:url value="${pro.rutaImagen}"/>"
+											style="width: 150px;">
+										<div class="media-body">
+											<h4 class="media-heading">
+												&nbsp; <span><c:out value="${pro.descripcion}"></c:out></span>
+											</h4>
+										</div>
 									</div>
-								</div>
-							</td>
+								</td>
+								<td class="col-md-1 text-center"><strong text=""></strong></td>
+								<td class="col-md-1"><a href="" class="btn btn-danger">
+										<span class="glyphicon glyphicon-remove"></span> Eliminar
+								</a></td>
+							</tr>
 
-							<td class="col-md-1 text-center"><strong text=""></strong></td>
-							<td class="col-md-1">
-								<a href="" class="btn btn-danger">
-									<span class="glyphicon glyphicon-remove"></span> Eliminar
-								</a>
-							</td>
-						</tr>
-						
-						
-						<tr>
-							<td> </td>
-							<td><h3>Total</h3></td>
-							<td class="text-right"><h3>
-									<strong text="">$31.53</strong>
-								</h3></td>
-						</tr>
-						<tr>
-							<td> </td>
-							<td>
-								<a href="index.jsp" class="btn btn-default">
-									<span class="glyphicon glyphicon-shopping-cart"></span>
-									Continuar comprando
-								</a>
-							</td>
-							<td>
-								<a href="" class="btn btn-success">
-									Finalizar compra <span class="glyphicon glyphicon-play"></span>
-								</a>
-							</td>
-						</tr>
+
+							<tr>
+								<td> </td>
+								<td><h3>Total</h3></td>
+								<td class="text-right"><h3>
+										<strong><c:out value="${pro.precioUnitarioSinIva}"></c:out></strong>
+									</h3></td>
+							</tr>
+							<tr>
+								<td> </td>
+								<td><a href="index.jsp" class="btn btn-default"> <span
+										class="glyphicon glyphicon-shopping-cart"></span> Continuar
+										comprando
+								</a></td>
+								<td><a href="" class="btn btn-success"> Finalizar
+										compra <span class="glyphicon glyphicon-play"></span>
+								</a></td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
@@ -84,9 +81,9 @@
 	</div>
 	<br>
 	<br>
-	
-	
-	<%@include file="includes/footer.jsp" %>
-	
+
+
+	<%@include file="includes/footer.jsp"%>
+
 </body>
 </html>

@@ -50,7 +50,10 @@ String methodName = ControllerLogin.class.getSimpleName() + ".ControllerLogin()"
 		
 	 aPersonas =	OperacionesDB.mostraTodasPersonas(session);
 	 aProducto = OperacionesDB.mostraTodoslosproductos(session);
-	 
+		for (Producto producto : aProducto) {
+			System.out.println("producto en el for "+producto);
+		}
+	
 		if (personas!=null) {
 	
 			request.setAttribute("persona", personas);

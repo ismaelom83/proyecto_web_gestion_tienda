@@ -26,7 +26,7 @@ pageContext.setAttribute("listaP", listaP);
 %>
 
 	<div class="container">
-	  <c:if test = "${sessionScope.productoCarritoLista==null}">
+	  <c:if test = "${pageScope.listaP==null}">
 		<div class="row">
 			<div class="col-md-offset-1 col-md-10">
 				<div class="jumbotron">
@@ -37,7 +37,7 @@ pageContext.setAttribute("listaP", listaP);
 			</div>
 		</div>
 		  </c:if>
-		    <c:if test = "${sessionScope.productoCarritoLista!=null}">
+		    <c:if test = "${pageScope.listaP!=null}">
 		<div class="row">
 			<div class="col-sm-12 col-md-10 col-md-offset-1">
 				<table class="table table-hover">
@@ -49,7 +49,7 @@ pageContext.setAttribute("listaP", listaP);
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${sessionScope.productoCarritoLista}" var="pro">
+						<c:forEach items="${pageScope.listaP}" var="pro">
 							<tr>
 								<td class="col-md-10">
 									<div class="media">
@@ -74,32 +74,21 @@ pageContext.setAttribute("listaP", listaP);
 							<td> </td>
 							<td><h3>Total</h3></td>
 							<td class="text-right"><h3>
-									<strong><c:out value="${sessionScope.sumaTotal}"></c:out></strong>
+									<strong><c:out value="${pro.precioUnitarioSinIva}"></c:out></strong>
 								</h3></td>
 						</tr>
 						<tr>
 							<td> </td>
 							<td>
-							<c:if test="${sessionScope.persona!=null}">
-							<a href="clienteNormal.jsp" class="btn btn-default">
 							
+							<a href="index.jsp" class="btn btn-default">	
 							 <span class="glyphicon glyphicon-shopping-cart"></span> Continuar
 									comprando
 							</a>
-							</c:if>
-							<c:if test="${sessionScope.persona==null}">
-							<a href="index.jsp" class="btn btn-default">
-							
-							 <span class="glyphicon glyphicon-shopping-cart"></span> Continuar
-									comprando
-							</a>
-							</c:if>
 							</td>
-							<td>
-							<form action="http://localhost:8080/proyecto_web_gestion_tienda/ControllerCarrito" method="post">
-							<button type="submit" class="btn btn-success">FinalizarCompra</button>
-							</form>
-							</td>
+							<td><a href="#" class="btn btn-success"> Finalizar
+									compra <span class="glyphicon glyphicon-play"></span>
+							</a></td>
 						</tr>
 
 					</tbody>

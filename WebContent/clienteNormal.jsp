@@ -14,19 +14,21 @@
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-	<%@include file="includes/nav.jsp"%>
-	<h1>Cliente normal</h1>
 
-	<%
-		ArrayList<Producto> listaP = (ArrayList<Producto>) request.getAttribute("todosProductos");
-	pageContext.setAttribute("listaP", listaP);
-	%>
+
+	<%@include file="includes/nav.jsp"%>
+
+
+
+
+<h1>${sessionScope.persona}</h1>
 
 	<div class="container">
 		<div class="row">
-			<c:forEach items="${pageScope.listaP}" var="producto">
+			<c:forEach items="${sessionScope.todosProductos}" var="producto">
 				<div class="col-lg-4">
 					<div class="panel panel-default panel-producto">
+					<a href="ControllerProductoId?idProducto=<c:out value="${producto.id}"></c:out>" style="text-decoration:none;color:black;">
 						<div class="panel-heading">
 							<span><c:out value="${producto.descripcion}"></c:out></span>
 						</div>
@@ -43,6 +45,7 @@
 								</div>
 							</div>
 						</div>
+						</a>
 					</div>
 				</div>
 			</c:forEach>

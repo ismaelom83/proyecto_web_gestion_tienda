@@ -14,8 +14,6 @@
 </head>
 <body>
 	<%@include file="includes/nav.jsp"%>
-
-
 	<div class="container">
 		<div class="row">
 			<div class="col-md-offset-1 col-md-8">
@@ -37,6 +35,12 @@
 						 ${productoId.descripcion}
 						</h3>
 					</div>
+					<div>
+					<form action="">
+					<label >Introduce cantidad</label>
+					<input type="number" name="cantidad">
+					</form>
+					</div>
 					<br>
 					<div class="pull-right">
 						<h4>
@@ -45,13 +49,30 @@
 							</strong>
 						</h4>
 					</div>
-					<a href="ControllerCarrito?idProductoCarrito=${productoId.id}" type="button" class="btn btn-lg btn-success btn-product">Añadir al Carrito</a>
+					<c:if test="${sessionScope.persona!=null}">
+					<a href="ControllerCarrito?idProductoCarrito=${productoId.id}?cantidad=cantidad" type="button" class="btn btn-lg btn-success btn-product">Añadir al Carrito</a>
+					</c:if>
+						<c:if test="${sessionScope.persona==null}">
+					<a href="ControllerCarritoNologeado?idProductoCarrito=${productoId.id}" type="button" class="btn btn-lg btn-success btn-product">Añadir al Carrito</a>
+					</c:if>
 					<br>
 					<br>
+					<c:if test="${sessionScope.persona!=null}">
+					<form
+						action="clienteNormal.jsp"
+						method="get">
+						<button type="submit" class="btn btn-lg btn-primary btn-product">  VOLVER  </button>
+					</form>
+					</c:if>
+						<c:if test="${sessionScope.persona==null}">
 					<form
 						action="http://localhost:8080/proyecto_web_gestion_tienda/ControllerIndex"
 						method="get">
 						<button type="submit" class="btn btn-lg btn-primary btn-product">  VOLVER  </button>
+					</form>
+					</c:if>
+					<form action="">
+					
 					</form>
 				</div>
 			</div>

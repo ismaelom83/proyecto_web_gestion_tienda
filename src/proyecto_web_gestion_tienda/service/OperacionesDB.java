@@ -13,7 +13,8 @@ import proyecto_web_gestion_tienda.model.Producto;
 
 
 public class OperacionesDB {
-		
+	
+	
 		public static Persona logIn(Session s, String email,String pass) {
 			String hQuery = "from Persona p " + " where p.mail = :email"+" and p.pass = :pass";
 			Persona p = s.createQuery(hQuery, Persona.class).setParameter("email", email).setParameter("pass", pass).setMaxResults(1).uniqueResult();
@@ -68,5 +69,6 @@ public class OperacionesDB {
 			return null;
 
 		}
-	
+		
+		
 }

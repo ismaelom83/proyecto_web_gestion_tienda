@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -42,21 +43,21 @@ String methodName = ControllerLogin.class.getSimpleName() + ".ControllerLogin()"
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
 		ArrayList<Persona> aPersonas;
 		ArrayList<Producto> aProducto;
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		Persona personas = OperacionesDB.logIn(session, email,password);
-		
+
+		Persona personas = OperacionesDB.logIn(session, email,password);	
 	 aPersonas =	OperacionesDB.mostraTodasPersonas(session);
 	 aProducto = OperacionesDB.mostraTodoslosproductos(session);
-		for (Producto producto : aProducto) {
-			System.out.println("producto en el for "+producto);
-		}
+	
 	
 		if (personas!=null) {
-	
-			request.setAttribute("persona", personas);
+			
+		
+			
 			request.setAttribute("todasPersonas", aPersonas);
 			switch (personas.getTipoPersona()) {
 			case " A":
@@ -72,7 +73,9 @@ String methodName = ControllerLogin.class.getSimpleName() + ".ControllerLogin()"
 				logger.info(String.format("Trabajador ventas logeado.", methodName));
 				break;
 			case "CN":
-				request.setAttribute("todosProductos", aProducto);
+				HttpSession mySession = request.getSession();
+				mySession.setAttribute("persona", personas.getNombre());
+				mySession.setAttribute("todosProductos", aProducto);
 				request.getRequestDispatcher("clienteNormal.jsp").forward(request, response);
 				logger.info(String.format("Cliente normal logeado.", methodName));
 				break;

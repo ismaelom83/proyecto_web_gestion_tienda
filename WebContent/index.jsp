@@ -1,3 +1,4 @@
+<%@page import="javax.persistence.metamodel.SetAttribute"%>
 <%@page import="proyecto_web_gestion_tienda.model.Producto"%>
 <%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -32,6 +33,10 @@ if(listaP==null){
 
 %>
 
+<%
+HttpSession mySession=request.getSession();  
+mySession.invalidate();
+%>
 
 
 <%@include file="includes/nav.jsp" %>

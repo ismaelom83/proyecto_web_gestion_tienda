@@ -25,7 +25,7 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="carrito.jsp" ><span
+                <li><a href="http://localhost:8080/proyecto_web_gestion_tienda/ControllerCarrito" ><span
                         class="glyphicon glyphicon-shopping-cart"></span> Carrito</a></li>
                 <li><a href="login.jsp"><span
                         class="glyphicon glyphicon-user"></span> Login</a></li>
@@ -34,7 +34,9 @@
                     role="button" aria-haspopup="true" aria-expanded="false"> <span>Menú</span> <span class="caret"></span>
                 </a>
                     <ul class="dropdown-menu">
-                        <li><a>Salir</a>
+                        <li><form action="http://localhost:8080/proyecto_web_gestion_tienda/ControllerLogout" method="post">
+                        <button type="submit">LoGout</button>
+                        </form>
                         </li>
                     </ul></li>
             </ul>

@@ -19,7 +19,7 @@
 
 <body>
 
-
+<%@include file="includes/nav.jsp" %>
 	<%
 		ArrayList<Producto> listaP = (ArrayList<Producto>) request.getAttribute("todosProductos");
 	pageContext.setAttribute("listaP", listaP);
@@ -33,13 +33,17 @@ if(listaP==null){
 
 %>
 
-<%
-HttpSession mySession=request.getSession();  
+
+
+
+<%  
+
+HttpSession mySession = request.getSession();
+if(mySession.getAttribute("persona")!=null){
 mySession.invalidate();
+}
+
 %>
-
-
-<%@include file="includes/nav.jsp" %>
 
 
 

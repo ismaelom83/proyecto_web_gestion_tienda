@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -25,7 +26,6 @@ public class ControllerCarritoNologeado extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	ArrayList<Producto> listaCarrito = new ArrayList<>();
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	private static Logger logger = LogManager.getLogger(ControllerLogin.class);
 	static SessionFactory sessionFactory;
@@ -47,16 +47,29 @@ public class ControllerCarritoNologeado extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		HttpSession mySession = request.getSession(true);
+		int sumaTotal = 0;
 		try {
 			int id = Integer.parseInt(request.getParameter("idProductoCarrito"));
+			int cantidad = Integer.parseInt(request.getParameter("cantidad"));
 			Producto p = OperacionesDB.buscarProductoId(session, id);
 		
-			if (p != null) {
+			@SuppressWarnings("unchecked")
+			ArrayList<Producto> listaCarrito = (ArrayList<Producto>) mySession.getAttribute("productoCarritoLista2");
+			if (listaCarrito == null) {
+				listaCarrito = new ArrayList<>();
+				mySession.setAttribute("productoCarritoLista2", listaCarrito);
+
+			}
+			
+			if (listaCarrito!= null) {
 				listaCarrito.add(p);
 			}
-			System.out.println("esto deberia de ser la lista si log: "+listaCarrito);
-			request.setAttribute("productoCarritoLista", listaCarrito);
+			for (Producto pro: listaCarrito) {
+				sumaTotal += pro.getPrecioUnitarioSinIva()*cantidad;
+			}
+			mySession.setAttribute("cantidad", cantidad);
+			mySession.setAttribute("sumaTotal", sumaTotal);
 			request.getRequestDispatcher("carritoNologeado.jsp").forward(request, response);
 
 		} catch (NumberFormatException e) {

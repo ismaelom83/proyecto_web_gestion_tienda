@@ -140,4 +140,68 @@ public class Producto implements Serializable {
 		this.valoracionesProducto = valoracionesProducto;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + borradoLogico;
+		result = prime * result + canjeable;
+		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
+		result = prime * result + descuento;
+		result = prime * result + ((detallePedidos == null) ? 0 : detallePedidos.hashCode());
+		result = prime * result + id;
+		result = prime * result + precioUnitarioSinIva;
+		result = prime * result + ((rutaImagen == null) ? 0 : rutaImagen.hashCode());
+		result = prime * result + stock;
+		result = prime * result + ((valoracionesProducto == null) ? 0 : valoracionesProducto.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Producto other = (Producto) obj;
+		if (borradoLogico != other.borradoLogico)
+			return false;
+		if (canjeable != other.canjeable)
+			return false;
+		if (descripcion == null) {
+			if (other.descripcion != null)
+				return false;
+		} else if (!descripcion.equals(other.descripcion))
+			return false;
+		if (descuento != other.descuento)
+			return false;
+		if (detallePedidos == null) {
+			if (other.detallePedidos != null)
+				return false;
+		} else if (!detallePedidos.equals(other.detallePedidos))
+			return false;
+		if (id != other.id)
+			return false;
+		if (precioUnitarioSinIva != other.precioUnitarioSinIva)
+			return false;
+		if (rutaImagen == null) {
+			if (other.rutaImagen != null)
+				return false;
+		} else if (!rutaImagen.equals(other.rutaImagen))
+			return false;
+		if (stock != other.stock)
+			return false;
+		if (valoracionesProducto == null) {
+			if (other.valoracionesProducto != null)
+				return false;
+		} else if (!valoracionesProducto.equals(other.valoracionesProducto))
+			return false;
+		return true;
+	}
+
+	
+	
+	
 }

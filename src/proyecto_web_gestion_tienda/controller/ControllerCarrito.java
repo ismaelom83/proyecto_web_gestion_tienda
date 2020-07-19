@@ -50,7 +50,9 @@ public class ControllerCarrito extends HttpServlet {
 			try {
 
 				int id = Integer.parseInt(request.getParameter("idProductoCarrito"));
+				int cantidad = Integer.parseInt(request.getParameter("cantidad"));	
 				Producto p = OperacionesDB.buscarProductoId(session, id);
+				@SuppressWarnings("unchecked")
 				ArrayList<Producto> listaCarrito = (ArrayList<Producto>) mySession.getAttribute("productoCarritoLista");
 				if (listaCarrito == null) {
 					listaCarrito = new ArrayList<>();
@@ -61,8 +63,9 @@ public class ControllerCarrito extends HttpServlet {
 					listaCarrito.add(p);
 				}
 				for (Producto pro: listaCarrito) {
-					sumaTotal += pro.getPrecioUnitarioSinIva();
+					sumaTotal += pro.getPrecioUnitarioSinIva()*cantidad;
 				}
+				mySession.setAttribute("cantidad", cantidad);
 				mySession.setAttribute("sumaTotal", sumaTotal);
 				request.getRequestDispatcher("carrito.jsp").forward(request, response);
 				

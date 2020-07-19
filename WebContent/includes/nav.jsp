@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <nav class="navbar h-5  mt-2">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -25,8 +26,14 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+            <c:if test="${sessionScope.persona!=null}">
                 <li><a href="http://localhost:8080/proyecto_web_gestion_tienda/ControllerCarrito" ><span
                         class="glyphicon glyphicon-shopping-cart"></span> Carrito</a></li>
+                        </c:if>
+                         <c:if test="${sessionScope.persona==null}">
+                <li><a href="http://localhost:8080/proyecto_web_gestion_tienda/ControllerCarritoNologeado" ><span
+                        class="glyphicon glyphicon-shopping-cart"></span>Carrito</a></li>
+                        </c:if>
                 <li><a href="login.jsp"><span
                         class="glyphicon glyphicon-user"></span> Login</a></li>
                 <li class="dropdown"><a

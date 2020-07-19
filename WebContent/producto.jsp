@@ -19,61 +19,69 @@
 			<div class="col-md-offset-1 col-md-8">
 				<div class="col-md-8">
 					<img src="${productoId.rutaImagen}"
-						class="img-responsive center-block" alt="Image" >
+						class="img-responsive center-block" alt="Image">
 				</div>
 				<br> <br> <br>
 				<div class="col-md-4">
 					<div class="text-center">
 						<h5>
 							<span text=""></span><br>
-							<spantext="">
-							</span>
+							<spantext=""> </span>
 						</h5>
 					</div>
 					<div>
-						<h3>
-						 ${productoId.descripcion}
-						</h3>
-					</div>
-					<div>
-					<form action="">
-					<label >Introduce cantidad</label>
-					<input type="number" name="cantidad">
-					</form>
+						<h3>${productoId.descripcion}</h3>
 					</div>
 					<br>
 					<div class="pull-right">
 						<h4>
-							<strong>
-						${productoId.precioUnitarioSinIva} 
-							</strong>
+							<strong> ${productoId.precioUnitarioSinIva} </strong>
 						</h4>
 					</div>
 					<c:if test="${sessionScope.persona!=null}">
-					<a href="ControllerCarrito?idProductoCarrito=${productoId.id}?cantidad=cantidad" type="button" class="btn btn-lg btn-success btn-product">Añadir al Carrito</a>
+						<div>
+							<form
+								action="http://localhost:8080/proyecto_web_gestion_tienda/ControllerCarrito"
+								method="get">
+								<label>NºProductos</label><br> <input type="number"
+									name="cantidad" value="1" width="30px"> <br> <br>
+								<input type="hidden" name="idProductoCarrito"
+									value="${productoId.id}">
+								<button type="submit" class="btn btn-lg btn-success btn-product">Añadir
+									a la cesta</button>
+							</form>
+						</div>
 					</c:if>
-						<c:if test="${sessionScope.persona==null}">
-					<a href="ControllerCarritoNologeado?idProductoCarrito=${productoId.id}" type="button" class="btn btn-lg btn-success btn-product">Añadir al Carrito</a>
+					<c:if test="${sessionScope.persona==null}">
+						<div>
+							<form
+								action="http://localhost:8080/proyecto_web_gestion_tienda/ControllerCarritoNologeado"
+								method="get">
+								<label>NºProductos</label><br> <input type="number"
+									name="cantidad" value="1" width="30px"> <br> <br>
+								<input type="hidden" name="idProductoCarrito"
+									value="${productoId.id}">
+								<button type="submit" class="btn btn-lg btn-success btn-product">Añadir
+									a la cesta</button>
+							</form>
+						</div>
 					</c:if>
-					<br>
-					<br>
+					<br> <br>
 					<c:if test="${sessionScope.persona!=null}">
-					<form
-						action="clienteNormal.jsp"
-						method="get">
-						<button type="submit" class="btn btn-lg btn-primary btn-product">  VOLVER  </button>
-					</form>
+						<form action="clienteNormal.jsp" method="get">
+							<button type="submit" class="btn btn-lg btn-primary btn-product">
+								VOLVER</button>
+						</form>
 					</c:if>
-						<c:if test="${sessionScope.persona==null}">
-					<form
-						action="http://localhost:8080/proyecto_web_gestion_tienda/ControllerIndex"
-						method="get">
-						<button type="submit" class="btn btn-lg btn-primary btn-product">  VOLVER  </button>
-					</form>
+					<c:if test="${sessionScope.persona==null}">
+						<form
+							action="http://localhost:8080/proyecto_web_gestion_tienda/ControllerIndex"
+							method="get">
+							<button type="submit" class="btn btn-lg btn-primary btn-product">
+								VOLVER</button>
+						</form>
 					</c:if>
-					<form action="">
-					
-					</form>
+					<form action=""></form>
 				</div>
 			</div>
 		</div>

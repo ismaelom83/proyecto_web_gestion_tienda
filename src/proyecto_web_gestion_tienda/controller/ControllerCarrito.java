@@ -54,7 +54,7 @@ public class ControllerCarrito extends HttpServlet {
 			System.out.println("esta es la camtidad "+cantidad);
 			OperacionesDB.insertarCantidad(session, id, cantidad);
 			Producto p = OperacionesDB.buscarProductoId(session, id);
-			System.out.println("esta deberia de ser la cantidad "+p.getStock());
+			System.out.println("esta deberia de ser la cantidad "+p.getCantidad());
 			
 			
 			
@@ -86,7 +86,6 @@ public class ControllerCarrito extends HttpServlet {
 			for (Producto pro : listaCarrito) {
 				sumaTotal += pro.getPrecioUnitarioSinIva() * cantidad;
 			}
-			mySession.setAttribute("cantidad", cantidad);
 			mySession.setAttribute("sumaTotal", sumaTotal);
 			request.getRequestDispatcher("carrito.jsp").forward(request, response);
 
@@ -102,17 +101,13 @@ public class ControllerCarrito extends HttpServlet {
 			if (listaCarrito == null) {
 				listaCarrito = new ArrayList<>();
 				if (mySession.getAttribute("listaLogeada")!=null) {
-					System.out.println("deberia entrar aqui");
 					mySession.setAttribute("productoCarritoLista", listaLogeada2);
 				}else {
-					System.out.println("aqiu no deberia");
 					mySession.setAttribute("productoCarritoLista", listaCarrito);
 					
 				}				
-			}
-			
+			}		
 			System.out.println("este es my carrito "+listaCarrito);
-
 			request.getRequestDispatcher("carrito.jsp").forward(request, response);
 		}
 

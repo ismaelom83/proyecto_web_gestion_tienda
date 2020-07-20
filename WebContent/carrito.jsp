@@ -71,8 +71,8 @@
 									<td class="col-md-1 text-center"><strong><c:out
 												value="${pro.precioUnitarioSinIva}"></c:out></strong>
 									<td class="text-left"><strong><c:out
-												value="${sessionScope.cantidad}"></c:out></strong></td>
-									</td>
+												value="${pro.cantidad}"></c:out></strong></td>
+								
 									<td class="col-md-1"><a
 										href="BorrarCarrito?idProductoBorrar=<c:out value="${pro.id}"></c:out>&cantidad=${sessionScope.cantidad}"
 										class="btn btn-danger"> <span

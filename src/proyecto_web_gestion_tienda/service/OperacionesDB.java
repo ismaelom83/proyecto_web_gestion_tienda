@@ -69,6 +69,19 @@ public class OperacionesDB {
 			return null;
 
 		}
+
+		public static void insertarCantidad(Session s, int id,int cantidad) {
+		
+			try {
+				 s.createQuery("Update Producto set stock=:stock where id = :id")
+				  .setParameter("stock", cantidad)
+				  .setParameter("id", id).executeUpdate();
+			} finally {
+				System.out.println("esto falla");
+			}
+			
+			
+		}
 		
 		
 }

@@ -17,6 +17,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import antlr.collections.List;
+import empresa.modelo.OpreracionesTrabajadores;
 import proyecto_web_gestion_tienda.model.DetallePedido;
 import proyecto_web_gestion_tienda.model.Persona;
 import proyecto_web_gestion_tienda.model.Producto;
@@ -45,48 +46,96 @@ public class ControllerCarrito extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession mySession = request.getSession();
-	int sumaTotal = 0;
-		
-			try {
+		int sumaTotal = 0;
+		try {
 
-				int id = Integer.parseInt(request.getParameter("idProductoCarrito"));
-				int cantidad = Integer.parseInt(request.getParameter("cantidad"));	
-				Producto p = OperacionesDB.buscarProductoId(session, id);
-				@SuppressWarnings("unchecked")
-				ArrayList<Producto> listaCarrito = (ArrayList<Producto>) mySession.getAttribute("productoCarritoLista");
-				if (listaCarrito == null) {
-					listaCarrito = new ArrayList<>();
-					mySession.setAttribute("productoCarritoLista", listaCarrito);
-
-				}
-				if (listaCarrito != null) {
-					listaCarrito.add(p);
-				}
-				for (Producto pro: listaCarrito) {
-					sumaTotal += pro.getPrecioUnitarioSinIva()*cantidad;
-				}
-				mySession.setAttribute("cantidad", cantidad);
-				mySession.setAttribute("sumaTotal", sumaTotal);
-				request.getRequestDispatcher("carrito.jsp").forward(request, response);
-				
-			} catch (NumberFormatException e) {
-				request.getRequestDispatcher("carrito.jsp").forward(request, response);
-			}
-		
-		
+			int id = Integer.parseInt(request.getParameter("idProductoCarrito"));
+			int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+			System.out.println("esta es la camtidad "+cantidad);
+			OperacionesDB.insertarCantidad(session, id, cantidad);
+			Producto p = OperacionesDB.buscarProductoId(session, id);
+			System.out.println("esta deberia de ser la cantidad "+p.getStock());
 			
+			
+			
+			@SuppressWarnings("unchecked")
+			ArrayList<Producto> listaLogeada2 = (ArrayList<Producto>) mySession.getAttribute("listaLogeada");
+			
+			System.out.println("a qui deberia de estar e n  el controlador " + listaLogeada2);
+			
+			@SuppressWarnings("unchecked")
+			ArrayList<Producto> listaCarrito = (ArrayList<Producto>) mySession.getAttribute("productoCarritoLista");
+			if (listaCarrito == null) {
+				listaCarrito = new ArrayList<>();
+				if (mySession.getAttribute("listaLogeada")!=null) {
+					System.out.println("deberia entrar aqui");
+					mySession.setAttribute("productoCarritoLista", listaLogeada2);
+				}else {
+					System.out.println("aqiu no deberia");
+					mySession.setAttribute("productoCarritoLista", listaCarrito);
+					
+				}				
+			}
+			
+			System.out.println("este es my carrito "+listaCarrito);
+
+
+			if (listaCarrito != null) {
+				listaCarrito.add(p);
+			}
+			for (Producto pro : listaCarrito) {
+				sumaTotal += pro.getPrecioUnitarioSinIva() * cantidad;
+			}
+			mySession.setAttribute("cantidad", cantidad);
+			mySession.setAttribute("sumaTotal", sumaTotal);
+			request.getRequestDispatcher("carrito.jsp").forward(request, response);
+
+		} catch (NumberFormatException e) {
+				
+			@SuppressWarnings("unchecked")
+			ArrayList<Producto> listaLogeada2 = (ArrayList<Producto>) mySession.getAttribute("listaLogeada");
+			
+			System.out.println("a qui deberia de estar e n  el controlador " + listaLogeada2);
+			
+			@SuppressWarnings("unchecked")
+			ArrayList<Producto> listaCarrito = (ArrayList<Producto>) mySession.getAttribute("productoCarritoLista");
+			if (listaCarrito == null) {
+				listaCarrito = new ArrayList<>();
+				if (mySession.getAttribute("listaLogeada")!=null) {
+					System.out.println("deberia entrar aqui");
+					mySession.setAttribute("productoCarritoLista", listaLogeada2);
+				}else {
+					System.out.println("aqiu no deberia");
+					mySession.setAttribute("productoCarritoLista", listaCarrito);
+					
+				}				
+			}
+			
+			System.out.println("este es my carrito "+listaCarrito);
+
+			request.getRequestDispatcher("carrito.jsp").forward(request, response);
+		}
 
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		HttpSession mySession = request.getSession();
-		ArrayList<Producto> listaCarrito = (ArrayList<Producto>)mySession.getAttribute("productoCarritoLista");
-		DetallePedido pedido = new DetallePedido();
-		request.setAttribute("listaProductos", listaCarrito);
-		request.getRequestDispatcher("facturaCarrito.jsp").forward(request, response);
-		
+
+		if (mySession.getAttribute("persona") != null && mySession.getAttribute("productoCarritoLista") != null) {
+
+			request.getRequestDispatcher("facturaCarrito.jsp").forward(request, response);
+
+		} else {
+			@SuppressWarnings("unchecked")
+			ArrayList<Producto> listaLogeada = (ArrayList<Producto>) mySession.getAttribute("productoCarritoLista2");
+			mySession.setAttribute("listaLogeada", listaLogeada);
+			DetallePedido factura = new DetallePedido();
+			
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		}
 
 	}
 

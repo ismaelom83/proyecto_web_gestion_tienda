@@ -23,7 +23,7 @@ public class DetallePedido implements Serializable {
 	private double totalLinea;
 
 	//bi-directional many-to-one association to CabeceraPedido
-	@ManyToOne
+//	@ManyToOne
 	@JoinColumn(name="id_pedido")
 	private CabeceraPedido cabeceraPedido;
 

@@ -17,6 +17,7 @@ public class Producto implements Serializable {
 
 	@Id
 	private int id;
+	
 
 	@Column(name="borrado_logico")
 	private byte borradoLogico;
@@ -34,6 +35,8 @@ public class Producto implements Serializable {
 	private String rutaImagen;
 
 	private int stock;
+	
+	private int cantidad;
 
 	//bi-directional many-to-one association to DetallePedido
 	@OneToMany(mappedBy="producto")
@@ -42,9 +45,31 @@ public class Producto implements Serializable {
 	//bi-directional one-to-one association to ValoracionesProducto
 	@OneToOne(mappedBy="producto")
 	private ValoracionesProducto valoracionesProducto;
+	
+	
 
 	public Producto() {
 	}
+
+	
+	
+	public int getCantidad() {
+		return cantidad;
+	}
+
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+
 
 	public int getId() {
 		return this.id;
@@ -140,12 +165,16 @@ public class Producto implements Serializable {
 		this.valoracionesProducto = valoracionesProducto;
 	}
 
+
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + borradoLogico;
 		result = prime * result + canjeable;
+		result = prime * result + cantidad;
 		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
 		result = prime * result + descuento;
 		result = prime * result + ((detallePedidos == null) ? 0 : detallePedidos.hashCode());
@@ -156,6 +185,9 @@ public class Producto implements Serializable {
 		result = prime * result + ((valoracionesProducto == null) ? 0 : valoracionesProducto.hashCode());
 		return result;
 	}
+
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -169,6 +201,8 @@ public class Producto implements Serializable {
 		if (borradoLogico != other.borradoLogico)
 			return false;
 		if (canjeable != other.canjeable)
+			return false;
+		if (cantidad != other.cantidad)
 			return false;
 		if (descripcion == null) {
 			if (other.descripcion != null)
@@ -200,6 +234,20 @@ public class Producto implements Serializable {
 			return false;
 		return true;
 	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "Producto [id=" + id + ", cantidad=" + cantidad + ", borradoLogico=" + borradoLogico + ", canjeable="
+				+ canjeable + ", descripcion=" + descripcion + ", descuento=" + descuento + ", precioUnitarioSinIva="
+				+ precioUnitarioSinIva + ", rutaImagen=" + rutaImagen + ", stock=" + stock + ", detallePedidos="
+				+ detallePedidos + ", valoracionesProducto=" + valoracionesProducto + "]";
+	}
+
+
+	
 
 	
 	

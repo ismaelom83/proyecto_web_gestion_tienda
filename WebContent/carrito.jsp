@@ -17,12 +17,16 @@
 <body>
 
 
+
+
 	<%@include file="includes/nav.jsp"%>
 
 
 	<%
-		ArrayList<Producto> listaP = (ArrayList<Producto>) request.getAttribute("productoCarritoLista");
+		HttpSession mySession = request.getSession();
+	ArrayList<Producto> listaP = (ArrayList<Producto>) mySession.getAttribute("productoCarritoLista");
 	pageContext.setAttribute("listaP", listaP);
+	
 	%>
 
 	<div class="container">
@@ -66,12 +70,15 @@
 									</td>
 									<td class="col-md-1 text-center"><strong><c:out
 												value="${pro.precioUnitarioSinIva}"></c:out></strong>
-													<td class="text-left">
-											<strong><c:out value="${sessionScope.cantidad}"></c:out></strong></td></td>
-									<td class="col-md-1"><a href="BorrarCarrito?idProductoBorrar=<c:out value="${pro.id}"></c:out>?cantidad=${sessionScope.cantidad}" class="btn btn-danger">
-											<span class="glyphicon glyphicon-remove"></span> Eliminar
+									<td class="text-left"><strong><c:out
+												value="${sessionScope.cantidad}"></c:out></strong></td>
+									</td>
+									<td class="col-md-1"><a
+										href="BorrarCarrito?idProductoBorrar=<c:out value="${pro.id}"></c:out>&cantidad=${sessionScope.cantidad}"
+										class="btn btn-danger"> <span
+											class="glyphicon glyphicon-remove"></span> Eliminar
 									</a></td>
-								
+
 								</tr>
 							</c:forEach>
 							<tr>
@@ -83,17 +90,10 @@
 							</tr>
 							<tr>
 								<td> </td>
-								<td><c:if test="${sessionScope.persona!=null}">
-										<a href="clienteNormal.jsp" class="btn btn-default"> <span
-											class="glyphicon glyphicon-shopping-cart"></span> Continuar
-											comprando
-										</a>
-									</c:if> <c:if test="${sessionScope.persona==null}">
-										<a href="index.jsp" class="btn btn-default"> <span
-											class="glyphicon glyphicon-shopping-cart"></span> Continuar
-											comprando
-										</a>
-									</c:if></td>
+								<td><a href="clienteNormal.jsp" class="btn btn-default">
+										<span class="glyphicon glyphicon-shopping-cart"></span>
+										Continuar comprando
+								</a></td>
 								<td>
 									<form
 										action="http://localhost:8080/proyecto_web_gestion_tienda/ControllerCarrito"

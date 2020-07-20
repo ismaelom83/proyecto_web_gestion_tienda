@@ -25,16 +25,16 @@ public class ControllerLogin extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	Session session =	HibernateUtil.getSessionFactory().openSession();
-private static Logger logger = LogManager.getLogger(ControllerLogin.class);
-String methodName = ControllerLogin.class.getSimpleName() + ".ControllerLogin()";
+
+	Session session = HibernateUtil.getSessionFactory().openSession();
+	private static Logger logger = LogManager.getLogger(ControllerLogin.class);
+	String methodName = ControllerLogin.class.getSimpleName() + ".ControllerLogin()";
 	static SessionFactory sessionFactory;
-	
+
 	public ControllerLogin() {
 		super();
 	}
-	
+
 	@Override
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
@@ -42,22 +42,20 @@ String methodName = ControllerLogin.class.getSimpleName() + ".ControllerLogin()"
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		ArrayList<Persona> aPersonas;
 		ArrayList<Producto> aProducto;
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 
-		Persona personas = OperacionesDB.logIn(session, email,password);	
-	 aPersonas =	OperacionesDB.mostraTodasPersonas(session);
-	 aProducto = OperacionesDB.mostraTodoslosproductos(session);
-	
-	
-		if (personas!=null) {
-			
-		
-			
+		Persona personas = OperacionesDB.logIn(session, email, password);
+		aPersonas = OperacionesDB.mostraTodasPersonas(session);
+		aProducto = OperacionesDB.mostraTodoslosproductos(session);
+
+		if (personas != null) {
+
 			request.setAttribute("todasPersonas", aPersonas);
 			switch (personas.getTipoPersona()) {
 			case " A":
@@ -73,11 +71,24 @@ String methodName = ControllerLogin.class.getSimpleName() + ".ControllerLogin()"
 				logger.info(String.format("Trabajador ventas logeado.", methodName));
 				break;
 			case "CN":
-				HttpSession mySession = request.getSession();
-				mySession.setAttribute("persona", personas.getNombre());
-				mySession.setAttribute("todosProductos", aProducto);
-				request.getRequestDispatcher("clienteNormal.jsp").forward(request, response);
-				logger.info(String.format("Cliente normal logeado.", methodName));
+				HttpSession mySession = request.getSession(true);
+				@SuppressWarnings("unchecked")
+				ArrayList<Producto> listaLogeada2 = (ArrayList<Producto>) mySession.getAttribute("listaLogeada");
+	
+				if (mySession.getAttribute("listaLogeada")!=null) {
+					mySession.setAttribute("persona", personas.getNombre() + ' ' + personas.getApellido1());
+					mySession.setAttribute("todosProductos", aProducto);
+					request.getRequestDispatcher("clientePremium.jsp").forward(request, response);
+					System.out.println("la lista del no logeado " + listaLogeada2);
+				}else {
+					mySession.setAttribute("persona", personas.getNombre() + ' ' + personas.getApellido1());
+					mySession.setAttribute("todosProductos", aProducto);
+					request.getRequestDispatcher("clienteNormal.jsp").forward(request, response);
+					System.out.println("la lista del no logeado " + listaLogeada2);
+					logger.info(String.format("Cliente normal logeado.", methodName));
+				}
+				
+				
 				break;
 			case " C":
 				request.setAttribute("todasPersonas", aProducto);
@@ -87,18 +98,18 @@ String methodName = ControllerLogin.class.getSimpleName() + ".ControllerLogin()"
 			case " H":
 				request.getRequestDispatcher("administrador.jsp").forward(request, response);
 				logger.info(String.format("Administrador logeado.", methodName));
-			break;
+				break;
 			default:
 				request.getRequestDispatcher("error.jsp").forward(request, response);
 				logger.info(String.format("Error al logearse.", methodName));
 				break;
-			}			
-			
+			}
+
 		} else {
 			request.getRequestDispatcher("error.jsp").forward(request, response);
 			logger.info(String.format("Error al logearse.", methodName));
-			
+
 		}
-	
+
 	}
 }

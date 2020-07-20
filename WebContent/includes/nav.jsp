@@ -27,7 +27,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
             <c:if test="${sessionScope.persona!=null}">
-                <li><a href="http://localhost:8080/proyecto_web_gestion_tienda/ControllerCarrito" ><span
+                <li><a href="carrito.jsp" ><span
                         class="glyphicon glyphicon-shopping-cart"></span> Carrito</a></li>
                         </c:if>
                          <c:if test="${sessionScope.persona==null}">

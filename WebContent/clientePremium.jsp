@@ -12,6 +12,17 @@
 </head>
 <body>
 
+	<%
+		HttpSession mySession2 = request.getSession();
+
+	int n =0;
+
+	if (mySession2.getAttribute("listaLogeada") != null && n == 0) {
+		n++;
+		response.sendRedirect("http://localhost:8080/proyecto_web_gestion_tienda/ControllerCarrito");
+	}
+	%>
+
 <%@include file="includes/nav.jsp" %>
 
 <h1>Clientes Premium</h1>

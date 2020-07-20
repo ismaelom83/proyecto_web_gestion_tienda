@@ -42,9 +42,5 @@ private static Logger logger = LogManager.getLogger(ControllerLogin.class);
 	request.setAttribute("productoId", p);
 	request.getRequestDispatcher("producto.jsp").forward(request, response);
 				
-	}
-
-	
-		
-	
+	}	
 }

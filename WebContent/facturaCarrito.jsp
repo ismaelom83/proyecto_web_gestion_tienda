@@ -80,7 +80,7 @@
 										<td><span><c:out value="${factura.descripcion}"></c:out></span></td>
 										<td class="text-right"><span><c:out
 													value="${factura.precioUnitarioSinIva}"></c:out></span></td>
-										<td class="text-right"><span>${sessionScope.cantidad}</span></td>
+										<td class="text-right"><span>${factura.cantidad}</span></td>
 
 									</tr>
 								</c:forEach>

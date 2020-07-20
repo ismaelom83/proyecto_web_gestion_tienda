@@ -67,15 +67,16 @@ public class OperacionesDB {
 
 	}
 
-	public static void insertarCantidad(Session s, int id, int cantidad) {
+	public static void actualizarStock(Session s, int id, int cantidad) {
 
 		Transaction txn = s.beginTransaction();
-		Query updateQuery = s.createQuery("UPDATE Producto set cantidad=:cantidad where id=:id");
+		Query updateQuery = s.createQuery("UPDATE Producto set stock=stock-:cantidad where id=:id");
 		updateQuery.setParameter("cantidad", cantidad);
 		updateQuery.setParameter("id", id);
 		updateQuery.executeUpdate();
 		txn.commit();
 
 	}
+
 
 }

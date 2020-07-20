@@ -53,6 +53,7 @@ public class ControllerCarritoNologeado extends HttpServlet {
 			int id = Integer.parseInt(request.getParameter("idProductoCarrito"));
 			int cantidad = Integer.parseInt(request.getParameter("cantidad"));
 			Producto p = OperacionesDB.buscarProductoId(session, id);
+			p.setCantidad(cantidad);
 		
 			@SuppressWarnings("unchecked")
 			ArrayList<Producto> listaCarrito = (ArrayList<Producto>) mySession.getAttribute("productoCarritoLista2");

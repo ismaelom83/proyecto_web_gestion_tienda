@@ -47,6 +47,10 @@
 										<span>Precio del producto: <c:out
 												value="${producto.precioUnitarioSinIva}"></c:out></span>
 									</div>
+									<div class="col-md-6 precio">
+										<span>Stock: <c:out
+												value="${producto.stock}"></c:out></span>
+									</div>
 								</div>
 							</div>
 						</a>

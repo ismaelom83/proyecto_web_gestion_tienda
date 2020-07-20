@@ -74,7 +74,7 @@
 												value="${pro.cantidad}"></c:out></strong></td>
 								
 									<td class="col-md-1"><a
-										href="BorrarCarrito?idProductoBorrar=<c:out value="${pro.id}"></c:out>&cantidad=${sessionScope.cantidad}"
+										href="BorrarCarrito?idProductoBorrar=<c:out value="${pro.id}"></c:out>&cantidad=${pro.cantidad}"
 										class="btn btn-danger"> <span
 											class="glyphicon glyphicon-remove"></span> Eliminar
 									</a></td>

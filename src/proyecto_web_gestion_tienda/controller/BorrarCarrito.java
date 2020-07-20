@@ -31,6 +31,14 @@ public class BorrarCarrito extends HttpServlet {
 	private static Logger logger = LogManager.getLogger(ControllerLogin.class);
 	static SessionFactory sessionFactory;
 
+	
+	@Override
+	public void init() throws ServletException {
+		// TODO Auto-generated method stub
+		super.init();
+	}
+
+	
 	@SuppressWarnings({ "null", "unlikely-arg-type" })
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -95,10 +103,5 @@ public class BorrarCarrito extends HttpServlet {
 		super.doPost(req, resp);
 	}
 
-	@Override
-	public void init() throws ServletException {
-		// TODO Auto-generated method stub
-		super.init();
-	}
 
 }

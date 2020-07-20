@@ -51,11 +51,9 @@ public class ControllerCarrito extends HttpServlet {
 
 			int id = Integer.parseInt(request.getParameter("idProductoCarrito"));
 			int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-			System.out.println("esta es la camtidad "+cantidad);
-			OperacionesDB.insertarCantidad(session, id, cantidad);
+			OperacionesDB.actualizarStock(session, id, cantidad);
 			Producto p = OperacionesDB.buscarProductoId(session, id);
-			System.out.println("esta deberia de ser la cantidad "+p.getCantidad());
-			
+			p.setCantidad(cantidad);
 			
 			
 			@SuppressWarnings("unchecked")
@@ -68,12 +66,9 @@ public class ControllerCarrito extends HttpServlet {
 			if (listaCarrito == null) {
 				listaCarrito = new ArrayList<>();
 				if (mySession.getAttribute("listaLogeada")!=null) {
-					System.out.println("deberia entrar aqui");
 					mySession.setAttribute("productoCarritoLista", listaLogeada2);
-				}else {
-					System.out.println("aqiu no deberia");
-					mySession.setAttribute("productoCarritoLista", listaCarrito);
-					
+				}else {					
+					mySession.setAttribute("productoCarritoLista", listaCarrito);					
 				}				
 			}
 			

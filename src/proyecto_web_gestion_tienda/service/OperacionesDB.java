@@ -2,14 +2,22 @@ package proyecto_web_gestion_tienda.service;
 
 import java.util.ArrayList;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import proyecto_web_gestion_tienda.controller.ControllerLogin;
 import proyecto_web_gestion_tienda.model.Persona;
 import proyecto_web_gestion_tienda.model.Producto;
+import proyecto_web_gestion_tienda.utils.HibernateUtil;
 
 public class OperacionesDB {
+	static Session session = HibernateUtil.getSessionFactory().openSession();
+	private static Logger logger = LogManager.getLogger(ControllerLogin.class);
+	static SessionFactory sessionFactory;
 
 	public static Persona logIn(Session s, String email, String pass) {
 		String hQuery = "from Persona p " + " where p.mail = :email" + " and p.pass = :pass";
@@ -40,10 +48,13 @@ public class OperacionesDB {
 
 	}
 
-	public static ArrayList<Producto> mostraTodoslosproductos(Session session) {
+	public static ArrayList<Producto> mostraTodoslosproductos() {
 //			List<String> aProductos;
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
 		String hQuery = " from Producto pro";
 		Query query = session.createQuery(hQuery);
+		@SuppressWarnings("unchecked")
 		ArrayList<Producto> aProductos = (ArrayList<Producto>) query.list();
 		if (aProductos != null) {
 			return aProductos;
@@ -55,6 +66,8 @@ public class OperacionesDB {
 	}
 
 	public static Producto buscarProductoId(Session s, int id) {
+	
+		
 		String hQuery = "from Producto p " + " where p.id = :id";
 		Producto p = s.createQuery(hQuery, Producto.class).setParameter("id", id).setMaxResults(1).uniqueResult();
 		if (p != null) {
@@ -67,16 +80,29 @@ public class OperacionesDB {
 
 	}
 
-	public static void actualizarStock(Session s, int id, int cantidad) {
+	public static void actualizarStock(int id, int cantidad) {
 
-		Transaction txn = s.beginTransaction();
-		Query updateQuery = s.createQuery("UPDATE Producto set stock=stock-:cantidad where id=:id");
-		updateQuery.setParameter("cantidad", cantidad);
-		updateQuery.setParameter("id", id);
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction txn=	session.beginTransaction();
+		Query updateQuery = session
+				.createQuery("UPDATE Producto p set p.stock=p.stock - '" + cantidad + "' where id='" + id + "'");
 		updateQuery.executeUpdate();
 		txn.commit();
 
 	}
 
+	public static void cabeceraPedido(int id, int num_pedido, int importe_total) {
+
+		Transaction txn = session.beginTransaction();
+		Query query = session
+				.createNativeQuery("INSERT INTO cabecera_pedido  (id_cliente, num_pedido,importe_total) VALUES(?,?,?)");
+		query.setParameter(1, id);
+		query.setParameter(2, num_pedido);
+		query.setParameter(3, importe_total);
+		query.executeUpdate();
+		txn.commit();
+
+	}
 
 }

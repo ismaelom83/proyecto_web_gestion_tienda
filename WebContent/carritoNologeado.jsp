@@ -84,12 +84,12 @@ pageContext.setAttribute("listaP", listaP);
 							<tr>
 								<td> </td>
 								<td><c:if test="${sessionScope.persona!=null}">
-										<a href="clienteNormal.jsp" class="btn btn-default"> <span
+										<a href="http://localhost:8080/proyecto_web_gestion_tienda/ControllerCliente" class="btn btn-default"> <span
 											class="glyphicon glyphicon-shopping-cart"></span> Continuar
 											comprando
 										</a>
 									</c:if> <c:if test="${sessionScope.persona==null}">
-										<a href="index.jsp" class="btn btn-default"> <span
+										<a href="http://localhost:8080/proyecto_web_gestion_tienda/ControllerIndex" class="btn btn-default"> <span
 											class="glyphicon glyphicon-shopping-cart"></span> Continuar
 											comprando
 										</a>

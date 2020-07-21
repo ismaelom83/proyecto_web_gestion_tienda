@@ -18,6 +18,7 @@ import org.hibernate.SessionFactory;
 
 import antlr.collections.List;
 import empresa.modelo.OpreracionesTrabajadores;
+import proyecto_web_gestion_tienda.model.CabeceraPedido;
 import proyecto_web_gestion_tienda.model.DetallePedido;
 import proyecto_web_gestion_tienda.model.Persona;
 import proyecto_web_gestion_tienda.model.Producto;
@@ -51,15 +52,17 @@ public class ControllerCarrito extends HttpServlet {
 
 			int id = Integer.parseInt(request.getParameter("idProductoCarrito"));
 			int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-			OperacionesDB.actualizarStock(session, id, cantidad);
+			OperacionesDB.actualizarStock(id, cantidad);
+//			ArrayList<Producto> aProductos2 = (ArrayList<Producto>) mySession.getAttribute("todosProductos");
+//			aProductos2 = OperacionesDB.mostraTodoslosproductos();
+//			mySession.setAttribute("todosProductos", aProductos2);
+//			System.out.println("lista actualizada "+aProductos2);
 			Producto p = OperacionesDB.buscarProductoId(session, id);
 			p.setCantidad(cantidad);
 			
 			
 			@SuppressWarnings("unchecked")
-			ArrayList<Producto> listaLogeada2 = (ArrayList<Producto>) mySession.getAttribute("listaLogeada");
-			
-			System.out.println("a qui deberia de estar e n  el controlador " + listaLogeada2);
+			ArrayList<Producto> listaLogeada2 = (ArrayList<Producto>) mySession.getAttribute("listaLogeada");		
 			
 			@SuppressWarnings("unchecked")
 			ArrayList<Producto> listaCarrito = (ArrayList<Producto>) mySession.getAttribute("productoCarritoLista");
@@ -71,8 +74,6 @@ public class ControllerCarrito extends HttpServlet {
 					mySession.setAttribute("productoCarritoLista", listaCarrito);					
 				}				
 			}
-			
-			System.out.println("este es my carrito "+listaCarrito);
 
 
 			if (listaCarrito != null) {
@@ -89,8 +90,6 @@ public class ControllerCarrito extends HttpServlet {
 			@SuppressWarnings("unchecked")
 			ArrayList<Producto> listaLogeada2 = (ArrayList<Producto>) mySession.getAttribute("listaLogeada");
 			
-			System.out.println("a qui deberia de estar e n  el controlador " + listaLogeada2);
-			
 			@SuppressWarnings("unchecked")
 			ArrayList<Producto> listaCarrito = (ArrayList<Producto>) mySession.getAttribute("productoCarritoLista");
 			if (listaCarrito == null) {
@@ -101,8 +100,10 @@ public class ControllerCarrito extends HttpServlet {
 					mySession.setAttribute("productoCarritoLista", listaCarrito);
 					
 				}				
-			}		
-			System.out.println("este es my carrito "+listaCarrito);
+			}
+			
+			int idLogeado2 = (int)mySession.getAttribute("idLogeado");
+			System.out.println("este deberia ser el id del producto no logeado: "+idLogeado2);
 			request.getRequestDispatcher("carrito.jsp").forward(request, response);
 		}
 
@@ -116,6 +117,11 @@ public class ControllerCarrito extends HttpServlet {
 
 		if (mySession.getAttribute("persona") != null && mySession.getAttribute("productoCarritoLista") != null) {
 
+	ArrayList<Producto>	listaFactuta =	(ArrayList<Producto>) mySession.getAttribute("productoCarritoLista");
+	
+   int sumaTotal =  	(int)mySession.getAttribute("sumaTotal");
+	Persona per=   (Persona)mySession.getAttribute("personaCompleta");
+	 OperacionesDB.cabeceraPedido(per.getId(), 1,sumaTotal);
 			request.getRequestDispatcher("facturaCarrito.jsp").forward(request, response);
 
 		} else {
@@ -123,7 +129,6 @@ public class ControllerCarrito extends HttpServlet {
 			ArrayList<Producto> listaLogeada = (ArrayList<Producto>) mySession.getAttribute("productoCarritoLista2");
 			mySession.setAttribute("listaLogeada", listaLogeada);
 			DetallePedido factura = new DetallePedido();
-			
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 

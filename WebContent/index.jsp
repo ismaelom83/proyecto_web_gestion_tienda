@@ -33,9 +33,6 @@ if(listaP==null){
 
 %>
 
-
-
-
 <%  
 
 HttpSession mySession = request.getSession();

@@ -52,7 +52,7 @@ public class ControllerLogin extends HttpServlet {
 
 		Persona personas = OperacionesDB.logIn(session, email, password);
 		aPersonas = OperacionesDB.mostraTodasPersonas(session);
-		aProducto = OperacionesDB.mostraTodoslosproductos(session);
+		aProducto = OperacionesDB.mostraTodoslosproductos();
 
 		if (personas != null) {
 
@@ -77,13 +77,14 @@ public class ControllerLogin extends HttpServlet {
 	
 				if (mySession.getAttribute("listaLogeada")!=null) {
 					mySession.setAttribute("persona", personas.getNombre() + ' ' + personas.getApellido1());
-					mySession.setAttribute("todosProductos", aProducto);
-					request.getRequestDispatcher("clientePremium.jsp").forward(request, response);
+					mySession.setAttribute("personaCompleta", personas);
+					response.sendRedirect("http://localhost:8080/proyecto_web_gestion_tienda/ControllerCarrito");
 					System.out.println("la lista del no logeado " + listaLogeada2);
 				}else {
 					mySession.setAttribute("persona", personas.getNombre() + ' ' + personas.getApellido1());
-					mySession.setAttribute("todosProductos", aProducto);
-					request.getRequestDispatcher("clienteNormal.jsp").forward(request, response);
+					mySession.setAttribute("personaCompleta", personas);
+//					mySession.setAttribute("todosProductos", aProducto);
+					response.sendRedirect("http://localhost:8080/proyecto_web_gestion_tienda/ControllerCliente");
 					System.out.println("la lista del no logeado " + listaLogeada2);
 					logger.info(String.format("Cliente normal logeado.", methodName));
 				}
@@ -91,7 +92,7 @@ public class ControllerLogin extends HttpServlet {
 				
 				break;
 			case " C":
-				request.setAttribute("todasPersonas", aProducto);
+				request.setAttribute("todasPersonas", aPersonas);
 				request.getRequestDispatcher("clientePremium.jsp").forward(request, response);
 				logger.info(String.format("Cliente premium logeado.", methodName));
 				break;

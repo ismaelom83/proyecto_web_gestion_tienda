@@ -68,7 +68,7 @@
 					</c:if>
 					<br> <br>
 					<c:if test="${sessionScope.persona!=null}">
-						<form action="clienteNormal.jsp" method="get">
+						<form action="http://localhost:8080/proyecto_web_gestion_tienda/ControllerCliente" method="get">
 							<button type="submit" class="btn btn-lg btn-primary btn-product">
 								VOLVER</button>
 						</form>

@@ -90,7 +90,7 @@
 							</tr>
 							<tr>
 								<td> </td>
-								<td><a href="clienteNormal.jsp" class="btn btn-default">
+								<td><a href="http://localhost:8080/proyecto_web_gestion_tienda/ControllerCliente" class="btn btn-default">
 										<span class="glyphicon glyphicon-shopping-cart"></span>
 										Continuar comprando
 								</a></td>

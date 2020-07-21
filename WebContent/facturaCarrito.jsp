@@ -94,7 +94,7 @@
 					</div>
 				</div>
 			</div>
-				<a href="clienteNormal.jsp" class="btn btn-success"  >vover a comprar</a>
+				<a href="ControllerCliente" class="btn btn-success"  >vover a comprar</a>
 		</div>
 	</div>
 

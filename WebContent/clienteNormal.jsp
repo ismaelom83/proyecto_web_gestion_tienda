@@ -16,18 +16,20 @@
 <body>
 
 
+	<%
+		ArrayList<Producto> listaPro = (ArrayList<Producto>) request.getAttribute("todosProductos2");
+	pageContext.setAttribute("listaPro", listaPro);
+	%>
 
 
 	<%@include file="includes/nav.jsp"%>
-
-
 
 
 	<h1>${sessionScope.persona}</h1>
 
 	<div class="container">
 		<div class="row">
-			<c:forEach items="${sessionScope.todosProductos}" var="producto">
+			<c:forEach items="${pageScope.listaPro}" var="producto">
 				<div class="col-lg-4">
 					<div class="panel panel-default panel-producto">
 						<a

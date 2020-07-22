@@ -10,6 +10,8 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import proyecto_web_gestion_tienda.controller.ControllerLogin;
+import proyecto_web_gestion_tienda.model.CabeceraPedido;
+import proyecto_web_gestion_tienda.model.DetallePedido;
 import proyecto_web_gestion_tienda.model.Persona;
 import proyecto_web_gestion_tienda.model.Producto;
 import proyecto_web_gestion_tienda.utils.HibernateUtil;
@@ -66,8 +68,7 @@ public class OperacionesDB {
 	}
 
 	public static Producto buscarProductoId(Session s, int id) {
-	
-		
+
 		String hQuery = "from Producto p " + " where p.id = :id";
 		Producto p = s.createQuery(hQuery, Producto.class).setParameter("id", id).setMaxResults(1).uniqueResult();
 		if (p != null) {
@@ -84,7 +85,7 @@ public class OperacionesDB {
 
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-		Transaction txn=	session.beginTransaction();
+		Transaction txn = session.beginTransaction();
 		Query updateQuery = session
 				.createQuery("UPDATE Producto p set p.stock=p.stock - '" + cantidad + "' where id='" + id + "'");
 		updateQuery.executeUpdate();
@@ -92,17 +93,49 @@ public class OperacionesDB {
 
 	}
 
-	public static void cabeceraPedido(int id, int num_pedido, int importe_total) {
+	public static void cabeceraPedido(int id, int importe_total) {
 
 		Transaction txn = session.beginTransaction();
 		Query query = session
-				.createNativeQuery("INSERT INTO cabecera_pedido  (id_cliente, num_pedido,importe_total) VALUES(?,?,?)");
+				.createNativeQuery("INSERT INTO cabecera_pedido  (id_cliente,importe_total) VALUES(?,?)");
 		query.setParameter(1, id);
-		query.setParameter(2, num_pedido);
-		query.setParameter(3, importe_total);
+		query.setParameter(2, importe_total);
 		query.executeUpdate();
 		txn.commit();
 
+	}
+
+	public static void detallePedido(int idCabezera, int cabezera, int cantidad, int total) {
+		Transaction txn = session.beginTransaction();
+		Query query = session.createNativeQuery(
+				"INSERT INTO detalle_pedido  (id_pedido, id_producto,cantidad,total_linea) VALUES(?,?,?,?)");
+		query.setParameter(1, idCabezera);
+		query.setParameter(2, cabezera);
+		query.setParameter(3, cantidad);
+		query.setParameter(4, total);
+		query.executeUpdate();
+		txn.commit();
+
+	}
+
+	public static  CabeceraPedido consultaUltimoIdCabecera() {
+////		List<String> aProductos;
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+//		String hQuery = "SELECT * from cabecera_pedido order by id DESC limit 1";
+//		Query cabezeraPedido =  session.createQuery(hQuery);
+//
+//		return cabezeraPedido;
+
+		
+	
+		Query query = session.createQuery(
+				"from CabeceraPedido order by id  DESC");
+		query.setMaxResults(1);
+		CabeceraPedido last = (CabeceraPedido) query.uniqueResult();
+		
+		return last;
+		
 	}
 
 }

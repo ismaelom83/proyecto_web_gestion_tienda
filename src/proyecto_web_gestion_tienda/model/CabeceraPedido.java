@@ -20,8 +20,8 @@ public class CabeceraPedido implements Serializable {
 	@Column(name="importe_total")
 	private int importeTotal;
 
-	@Column(name="num_pedido")
-	private int numPedido;
+//	@Column(name="num_pedido")
+//	private int numPedido;
 
 	//bi-directional many-to-one association to Cliente
 	@ManyToOne
@@ -29,8 +29,8 @@ public class CabeceraPedido implements Serializable {
 	private Cliente cliente;
 
 	//bi-directional many-to-one association to DetallePedido
-	@OneToMany(mappedBy="cabeceraPedido")
-	private List<DetallePedido> detallePedidos;
+//	@OneToMany(mappedBy="cabeceraPedido")
+//	private List<DetallePedido> detallePedidos;
 
 	public CabeceraPedido() {
 	}
@@ -51,13 +51,13 @@ public class CabeceraPedido implements Serializable {
 		this.importeTotal = importeTotal;
 	}
 
-	public int getNumPedido() {
-		return this.numPedido;
-	}
-
-	public void setNumPedido(int numPedido) {
-		this.numPedido = numPedido;
-	}
+//	public int getNumPedido() {
+//		return this.numPedido;
+//	}
+//
+//	public void setNumPedido(int numPedido) {
+//		this.numPedido = numPedido;
+//	}
 
 	public Cliente getCliente() {
 		return this.cliente;
@@ -67,26 +67,26 @@ public class CabeceraPedido implements Serializable {
 		this.cliente = cliente;
 	}
 
-	public List<DetallePedido> getDetallePedidos() {
-		return this.detallePedidos;
-	}
+//	public List<DetallePedido> getDetallePedidos() {
+//		return this.detallePedidos;
+//	}
+//
+//	public void setDetallePedidos(List<DetallePedido> detallePedidos) {
+//		this.detallePedidos = detallePedidos;
+//	}
 
-	public void setDetallePedidos(List<DetallePedido> detallePedidos) {
-		this.detallePedidos = detallePedidos;
-	}
-
-	public DetallePedido addDetallePedido(DetallePedido detallePedido) {
-		getDetallePedidos().add(detallePedido);
-		detallePedido.setCabeceraPedido(this);
-
-		return detallePedido;
-	}
-
-	public DetallePedido removeDetallePedido(DetallePedido detallePedido) {
-		getDetallePedidos().remove(detallePedido);
-		detallePedido.setCabeceraPedido(null);
-
-		return detallePedido;
-	}
+//	public DetallePedido addDetallePedido(DetallePedido detallePedido) {
+//		getDetallePedidos().add(detallePedido);
+//		detallePedido.setCabeceraPedido(this);
+//
+//		return detallePedido;
+//	}
+//
+//	public DetallePedido removeDetallePedido(DetallePedido detallePedido) {
+//		getDetallePedidos().remove(detallePedido);
+//		detallePedido.setCabeceraPedido(null);
+//
+//		return detallePedido;
+//	}
 
 }

@@ -52,7 +52,7 @@ public class ControllerCarrito extends HttpServlet {
 
 			int id = Integer.parseInt(request.getParameter("idProductoCarrito"));
 			int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-			OperacionesDB.actualizarStock(id, cantidad);
+		
 //			ArrayList<Producto> aProductos2 = (ArrayList<Producto>) mySession.getAttribute("todosProductos");
 //			aProductos2 = OperacionesDB.mostraTodoslosproductos();
 //			mySession.setAttribute("todosProductos", aProductos2);
@@ -119,9 +119,23 @@ public class ControllerCarrito extends HttpServlet {
 
 	ArrayList<Producto>	listaFactuta =	(ArrayList<Producto>) mySession.getAttribute("productoCarritoLista");
 	
-   int sumaTotal =  	(int)mySession.getAttribute("sumaTotal");
-	Persona per=   (Persona)mySession.getAttribute("personaCompleta");
-	 OperacionesDB.cabeceraPedido(per.getId(), 1,sumaTotal);
+	for (Producto producto : listaFactuta) {
+		OperacionesDB.actualizarStock(producto.getId(), producto.getCantidad());
+	}
+	
+	
+	
+   int sumaTotal=(int)mySession.getAttribute("sumaTotal");
+	Persona per=(Persona)mySession.getAttribute("personaCompleta");
+		OperacionesDB.cabeceraPedido(per.getId(),sumaTotal);
+		CabeceraPedido cabezera = new CabeceraPedido();
+		 cabezera = OperacionesDB.consultaUltimoIdCabecera();
+		for (Producto producto : listaFactuta) {
+			OperacionesDB.detallePedido(cabezera.getId(),producto.getId(),producto.getCantidad(),sumaTotal);
+		}
+	
+		
+	 
 			request.getRequestDispatcher("facturaCarrito.jsp").forward(request, response);
 
 		} else {

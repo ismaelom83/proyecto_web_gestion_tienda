@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory name="">
+  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost/proyecto_web_gestion_tienda</property>
+  <property name="hibernate.connection.username">root</property>
+  <property name="hibernate.default_schema">curso</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+  <property name="hibernate.show_sql">true</property>
+  <property name="hibernate.hbm2ddl.auto">update</property>
+  <property name="hibernate.current_session_context_class">thread</property>
+  <mapping class="proyecto_web_gestion_tienda.model.Persona"/>
+  <mapping class="proyecto_web_gestion_tienda.model.Cliente"/>
+  <mapping class="proyecto_web_gestion_tienda.model.Trabajadore"/>
+  <mapping class="proyecto_web_gestion_tienda.model.OpcionesMenu"/>
+  <mapping class="proyecto_web_gestion_tienda.model.CategoriasMenu"/>
+  <mapping class="proyecto_web_gestion_tienda.model.CabeceraPedido"/>
+  <mapping class="proyecto_web_gestion_tienda.model.DetallePedido"/>
+  <mapping class="proyecto_web_gestion_tienda.model.Mensajeria"/>
+  <mapping class="proyecto_web_gestion_tienda.model.OpcCategoria"/>
+  <mapping class="proyecto_web_gestion_tienda.model.ValoracionesProducto"/>
+  <mapping class="proyecto_web_gestion_tienda.model.Producto"/>
+  <!--   <mapping resource="proyecto_web_gestion_tienda/model/Trabajadores.hbm.xml"/> 
+   <mapping resource="proyecto_web_gestion_tienda/model/CabeceraPedido.hbm.xml"/> 
+   <mapping resource="proyecto_web_gestion_tienda/model/OpcionesMenu.hbm.xml"/> 
+   <mapping resource="proyecto_web_gestion_tienda/model/Personas.hbm.xml"/> 
+   <mapping resource="proyecto_web_gestion_tienda/model/Clientes.hbm.xml"/> 
+   <mapping resource="proyecto_web_gestion_tienda/model/DetallePedido.hbm.xml"/> 
+   <mapping resource="proyecto_web_gestion_tienda/model/Mensajeria.hbm.xml"/> 
+   <mapping resource="proyecto_web_gestion_tienda/model/Productos.hbm.xml"/> -->
+ </session-factory>
+</hibernate-configuration>

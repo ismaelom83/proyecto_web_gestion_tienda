@@ -59,10 +59,10 @@
 						<div class="form-group">
 							<div class="col-md-12 control">
 								<div style="border-top: 1px solid #888; padding-top: 15px;">
-									�Todav�a no tienes una cuenta de cliente? �Puedes crearla ahora mismo <a
+									Todavia no tienes una cuenta de cliente? Puedes crearla ahora mismo <a
 										href="#"
 										onClick="$('#loginbox').hide(); $('#signupbox').show()">
-										pulsando aqu�! </a>
+										pulsando aqui! </a>
 								</div>
 							</div>
 						</div>
@@ -134,10 +134,8 @@
 	<br>
 	<%@include file="includes/footer.jsp" %>
 	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-		src="@{/webjars/jquery/jquery.min.js}"></script>
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-		src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>	
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
 </body>
 </html>

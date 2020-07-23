@@ -68,7 +68,7 @@ pageContext.setAttribute("listaP", listaP);
 												value="${pro.precioUnitarioSinIva}"></c:out></strong>
 													<td class="text-left">
 											<strong><c:out value="${pro.cantidad}"></c:out></strong></td></td>
-									<td class="col-md-1"><a href="BorrarCarrito?idProductoBorrar=<c:out value="${pro.id}"></c:out>" class="btn btn-danger">
+									<td class="col-md-1"><a href="ControllerBorrarCarrito?idProductoBorrar=<c:out value="${pro.id}"></c:out>" class="btn btn-danger">
 											<span class="glyphicon glyphicon-remove"></span> Eliminar
 									</a></td>
 								

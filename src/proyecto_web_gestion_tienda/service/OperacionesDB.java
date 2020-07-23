@@ -82,7 +82,6 @@ public class OperacionesDB {
 	}
 
 	public static void actualizarStock(int id, int cantidad) {
-
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		Transaction txn = session.beginTransaction();
@@ -93,11 +92,10 @@ public class OperacionesDB {
 
 	}
 
-	public static void cabeceraPedido(int id, int importe_total) {
+	public static void insertCabeceraPedido(int id, int importe_total) {
 
 		Transaction txn = session.beginTransaction();
-		Query query = session
-				.createNativeQuery("INSERT INTO cabecera_pedido  (id_cliente,importe_total) VALUES(?,?)");
+		Query query = session.createNativeQuery("INSERT INTO cabecera_pedido  (id_cliente,importe_total) VALUES(?,?)");
 		query.setParameter(1, id);
 		query.setParameter(2, importe_total);
 		query.executeUpdate();
@@ -105,7 +103,7 @@ public class OperacionesDB {
 
 	}
 
-	public static void detallePedido(int idCabezera, int cabezera, int cantidad, int total) {
+	public static void insertDetallePedido(int idCabezera, int cabezera, int cantidad, int total) {
 		Transaction txn = session.beginTransaction();
 		Query query = session.createNativeQuery(
 				"INSERT INTO detalle_pedido  (id_pedido, id_producto,cantidad,total_linea) VALUES(?,?,?,?)");
@@ -118,24 +116,56 @@ public class OperacionesDB {
 
 	}
 
-	public static  CabeceraPedido consultaUltimoIdCabecera() {
-////		List<String> aProductos;
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Session session = sessionFactory.openSession();
-//		String hQuery = "SELECT * from cabecera_pedido order by id DESC limit 1";
-//		Query cabezeraPedido =  session.createQuery(hQuery);
-//
-//		return cabezeraPedido;
-
-		
-	
-		Query query = session.createQuery(
-				"from CabeceraPedido order by id  DESC");
+	public static CabeceraPedido consultaUltimoIdCabecera() {
+		Query query = session.createQuery("from CabeceraPedido order by id  DESC");
 		query.setMaxResults(1);
 		CabeceraPedido last = (CabeceraPedido) query.uniqueResult();
-		
+
 		return last;
-		
+	}
+
+	public static ArrayList<CabeceraPedido> mostrarCabeceraPedido(int cliente) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		String hQuery = "from CabeceraPedido c where c.cliente = '" + cliente + "'";
+		Query query = session.createQuery(hQuery);
+		ArrayList<CabeceraPedido> cabezeraPedido = (ArrayList<CabeceraPedido>) query.list();
+
+		if (cabezeraPedido != null) {
+			return cabezeraPedido;
+		} else {
+//			System.out.println("credenciales no validas");
+		}
+		return null;
+
+	}
+
+	public static ArrayList<DetallePedido> mostrarLineasPedido(int id) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		String hQuery = "from DetallePedido de where de.cabeceraPedido ='" + id + "' ";
+		Query query = session.createQuery(hQuery);
+		@SuppressWarnings("unchecked")
+		ArrayList<DetallePedido> listaFactura = (ArrayList<DetallePedido>) query.list();
+
+		return listaFactura;
+
+	}
+
+	public static ArrayList<Producto> mostraTodoslosproductosLineasPedido(int id) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		String hQuery = " from Producto pro where pro.id = '" + id + "'";
+		Query query = session.createQuery(hQuery);
+		@SuppressWarnings("unchecked")
+		ArrayList<Producto> aProductos = (ArrayList<Producto>) query.list();
+		if (aProductos != null) {
+			return aProductos;
+		} else {
+//			System.out.println("credenciales no validas");
+		}
+		return null;
+
 	}
 
 }

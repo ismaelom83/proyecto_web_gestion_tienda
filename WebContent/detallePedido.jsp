@@ -1,31 +1,31 @@
-<!DOCTYPE html>
-<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="proyecto_web_gestion_tienda.model.DetallePedido"%>
 <%@page import="proyecto_web_gestion_tienda.model.Producto"%>
 <%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.Date"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<html lang="es">
+<!DOCTYPE html>
+<html>
 <head>
-<title>tienda online</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/styles.css">
-
 </head>
 <body>
+
 	<%@include file="includes/nav.jsp"%>
 
+
+
 	<%
-		Date dNow = new Date();
-	SimpleDateFormat ft = new SimpleDateFormat("MM/dd/yyyy");
-	String currentDate = ft.format(dNow);
+	HttpSession mySession = request.getSession();
+	ArrayList<DetallePedido> lineasPedido2 = (ArrayList<DetallePedido>) request.getAttribute("lineasPedido");
+	pageContext.setAttribute("listaPedido3", lineasPedido2);
+	int totalCompra = (int) request.getAttribute("sTotal");
+	 pageContext.setAttribute("total", totalCompra);
 	%>
-
-
 
 	<div class="container">
 		<div class="row">
@@ -40,13 +40,12 @@
 				<div class="row">
 					<div class="col-xs-6">
 						<address>
-							<strong>Comprado por:</strong><br>
-							<span>${sessionScope.persona}</span><br>
+							<strong>Comprado por:</strong><br> <span>${sessionScope.persona}</span><br>
 						</address>
 					</div>
 					<div class="col-xs-6 text-right">
 						<address>
-							<strong>Fecha de compra:</strong><br> <span><%=currentDate%></span><br>
+							<strong>Fecha de compra:</strong><br> <span></span><br>
 							<br>
 						</address>
 					</div>
@@ -74,19 +73,20 @@
 									</tr>
 								</thead>
 
-								<c:forEach items="${sessionScope.productoCarritoLista}"
-									var="factura">
+								<c:forEach items="${pageScope.listaPedido3}" var="lineas">
 									<tr>
-										<td><span><c:out value="${factura.descripcion}"></c:out></span></td>
+										<td><span><c:out
+													value="${lineas.producto.descripcion}"></c:out></span></td>
 										<td class="text-right"><span><c:out
-													value="${factura.precioUnitarioSinIva}"></c:out></span></td>
-										<td class="text-right"><span>${factura.cantidad}</span></td>
+													value="${lineas.producto.precioUnitarioSinIva}"></c:out></span></td>
+										<td class="text-right"><span></span>
+										<c:out value="${lineas.cantidad}"></c:out></td>
 
 									</tr>
 								</c:forEach>
 								<tr>
 									<td class="thick-line text-right"><strong>Total</strong></td>
-									<td class="thick-line text-right"><span>${sessionScope.sumaTotal}</span></td>
+									<td class="thick-line text-right"><span>${total}</span></td>
 								</tr>
 
 							</table>
@@ -94,23 +94,16 @@
 					</div>
 				</div>
 			</div>
-				<a href="ControllerCliente" class="btn btn-success"  >vover a comprar</a>
+			<a href="ControllerMisPedidos" class="btn btn-success">vover a
+				ver pedidos</a>
 		</div>
 	</div>
 
 
-	<%
-		HttpSession mySession = request.getSession();
-    
-		mySession.removeAttribute("productoCarritoLista");
-		mySession.removeAttribute("listaLogeada");
-
-	%>
-
 	<br>
 	<br>
+
 
 	<%@include file="includes/footer.jsp"%>
-
 </body>
 </html>

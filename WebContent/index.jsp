@@ -28,7 +28,7 @@
 <%
 
 if(listaP==null){
-	response.sendRedirect("http://localhost:8080/proyecto_web_gestion_tienda/ControllerIndex");
+	response.sendRedirect(request.getContextPath() + "/ControllerIndex");
 }
 
 %>

@@ -22,7 +22,7 @@ import proyecto_web_gestion_tienda.service.OperacionesDB;
 import proyecto_web_gestion_tienda.utils.HibernateUtil;
 
 @WebServlet("/ControllerIndex")
-public class ControladorIndex extends HttpServlet {
+public class ControllerIndex extends HttpServlet {
 
 	/**
 	 * 
@@ -40,7 +40,7 @@ public class ControladorIndex extends HttpServlet {
 	
 	
 
-	public ControladorIndex() {
+	public ControllerIndex() {
 		super();
 	}
 

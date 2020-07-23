@@ -24,8 +24,8 @@ public class DetallePedido implements Serializable {
 
 	//bi-directional many-to-one association to CabeceraPedido
 //	@ManyToOne
-//	@JoinColumn(name="id_pedido")
-//	private CabeceraPedido cabeceraPedido;
+	@Column(name="id_pedido")
+	private int cabeceraPedido;
 
 	//bi-directional many-to-one association to Producto
 	@ManyToOne
@@ -59,13 +59,13 @@ public class DetallePedido implements Serializable {
 		this.totalLinea = totalLinea;
 	}
 
-//	public CabeceraPedido getCabeceraPedido() {
-//		return this.cabeceraPedido;
-//	}
-//
-//	public void setCabeceraPedido(CabeceraPedido cabeceraPedido) {
-//		this.cabeceraPedido = cabeceraPedido;
-//	}
+	public int getCabeceraPedido() {
+		return this.cabeceraPedido;
+	}
+
+	public void setCabeceraPedido(int cabeceraPedido) {
+		this.cabeceraPedido = cabeceraPedido;
+	}
 
 	public Producto getProducto() {
 		return this.producto;

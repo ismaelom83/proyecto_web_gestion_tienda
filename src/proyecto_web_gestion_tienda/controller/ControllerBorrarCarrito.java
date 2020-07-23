@@ -20,8 +20,8 @@ import proyecto_web_gestion_tienda.model.Producto;
 import proyecto_web_gestion_tienda.service.OperacionesDB;
 import proyecto_web_gestion_tienda.utils.HibernateUtil;
 
-@WebServlet("/BorrarCarrito")
-public class BorrarCarrito extends HttpServlet {
+@WebServlet("/ControllerBorrarCarrito")
+public class ControllerBorrarCarrito extends HttpServlet {
 
 	/**
 	 * 

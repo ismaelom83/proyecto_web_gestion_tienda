@@ -52,14 +52,10 @@ public class ControllerCarrito extends HttpServlet {
 
 			int id = Integer.parseInt(request.getParameter("idProductoCarrito"));
 			int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-		
-//			ArrayList<Producto> aProductos2 = (ArrayList<Producto>) mySession.getAttribute("todosProductos");
-//			aProductos2 = OperacionesDB.mostraTodoslosproductos();
-//			mySession.setAttribute("todosProductos", aProductos2);
-//			System.out.println("lista actualizada "+aProductos2);
 			Producto p = OperacionesDB.buscarProductoId(session, id);
 			p.setCantidad(cantidad);
 			
+			mySession.setAttribute("producto", p);
 			
 			@SuppressWarnings("unchecked")
 			ArrayList<Producto> listaLogeada2 = (ArrayList<Producto>) mySession.getAttribute("listaLogeada");		
@@ -80,7 +76,7 @@ public class ControllerCarrito extends HttpServlet {
 				listaCarrito.add(p);
 			}
 			for (Producto pro : listaCarrito) {
-				sumaTotal += pro.getPrecioUnitarioSinIva() * cantidad;
+				sumaTotal += pro.getPrecioUnitarioSinIva() * pro.getCantidad();
 			}
 			mySession.setAttribute("sumaTotal", sumaTotal);
 			request.getRequestDispatcher("carrito.jsp").forward(request, response);
@@ -103,7 +99,6 @@ public class ControllerCarrito extends HttpServlet {
 			}
 			
 			int idLogeado2 = (int)mySession.getAttribute("idLogeado");
-			System.out.println("este deberia ser el id del producto no logeado: "+idLogeado2);
 			request.getRequestDispatcher("carrito.jsp").forward(request, response);
 		}
 
@@ -127,11 +122,11 @@ public class ControllerCarrito extends HttpServlet {
 	
    int sumaTotal=(int)mySession.getAttribute("sumaTotal");
 	Persona per=(Persona)mySession.getAttribute("personaCompleta");
-		OperacionesDB.cabeceraPedido(per.getId(),sumaTotal);
+		OperacionesDB.insertCabeceraPedido(per.getId(),sumaTotal);
 		CabeceraPedido cabezera = new CabeceraPedido();
 		 cabezera = OperacionesDB.consultaUltimoIdCabecera();
 		for (Producto producto : listaFactuta) {
-			OperacionesDB.detallePedido(cabezera.getId(),producto.getId(),producto.getCantidad(),sumaTotal);
+			OperacionesDB.insertDetallePedido(cabezera.getId(),producto.getId(),producto.getCantidad(),producto.getPrecioUnitarioSinIva()*producto.getCantidad());
 		}
 	
 		

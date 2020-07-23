@@ -29,7 +29,7 @@ public class ControllerLogout extends HttpServlet{
 		
 		 HttpSession mySession=request.getSession();  
          mySession.invalidate();  
-         response.sendRedirect("index.jsp");
+         response.sendRedirect(request.getContextPath() + "/ControllerIndex");
 	}
 
 	@Override

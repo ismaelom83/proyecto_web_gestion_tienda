@@ -19,9 +19,9 @@ public class ControllerLogout extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 HttpSession mySession=request.getSession();  
-         mySession.invalidate();  
-         response.sendRedirect("index.jsp");
+		HttpSession mySession=request.getSession();  
+        mySession.invalidate();  
+        response.sendRedirect(request.getContextPath() + "/ControllerIndex");
 	}
 
 	@Override

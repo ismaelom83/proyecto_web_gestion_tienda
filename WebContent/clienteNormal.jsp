@@ -8,9 +8,12 @@
 <head>
 <title>Tienda Online</title>
 <meta charset="utf-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -22,44 +25,115 @@
 	%>
 
 
-	<%@include file="includes/nav.jsp"%>
+<%@include file="includes/navPrincipal.jsp"%>
 
 
-	<h1>${sessionScope.persona}</h1>
+<div class="container">     
+        <div class="section" id="carousel">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mr-auto ml-auto">
 
-	<div class="container">
-		<div class="row">
-			<c:forEach items="${pageScope.listaPro}" var="producto">
-				<div class="col-lg-4">
-					<div class="panel panel-default panel-producto">
-						<a
-							href="ControllerProductoId?idProducto=<c:out value="${producto.id}"></c:out>"
-							style="text-decoration: none; color: black;">
-							<div class="panel-heading">
-								<span><c:out value="${producto.descripcion}"></c:out></span>
-							</div>
-							<div class="panel-body">
-								<img src="<c:url value="${producto.rutaImagen}"/>"
-									class="img-responsive center-block" alt="Image"
-									style="height: 200px;">
-							</div>
-							<div class="panel-footer">
-								<div class="row">
-									<div class="col-md-6 precio">
-										<span>Precio del producto: <c:out
-												value="${producto.precioUnitarioSinIva}"></c:out></span>
-									</div>
-									<div class="col-md-6 precio">
-										<span>Stock: <c:out
-												value="${producto.stock}"></c:out></span>
-									</div>
+                    <!-- Carousel Card -->
+                    <div class="card card-raised card-carousel">
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="5000">
+                          <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1" class=""></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="2" class=""></li>
+                          </ol>
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                              <img class="d-block w-100 h-100" src="img/s2.jpg"
+                              alt="First slide">
+                              <div class="carousel-caption d-none d-md-block">
+                                <h4>
+                                    <i class="material-icons"></i>
+                                    
+                                </h4>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <img class="d-block w-100" src="img/s3.jpg"  alt="Second slide">
+                              <div class="carousel-caption d-none d-md-block">
+                                <h4>
+                                    <i class="material-icons"></i>
+                                    
+                                </h4>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <img class="d-block w-100" src="img/s1.jpg" alt="Third slide">
+                              <div class="carousel-caption d-none d-md-block">
+                                <h4>
+                                    <i class="material-icons"></i>
+                            
+                                </h4>
+                              </div>
+                            </div>
+                          </div>
+                          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <i class="material-icons"></i>
+                            <span class="sr-only"></span>
+                          </a>
+                          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <i class="material-icons"></i>
+                            <span class="sr-only"></span>
+                          </a>
+                        </div>
+                    </div>
+                    <!-- End Carousel Card -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+   <div class="container">
+  <a class="btn btn-1">Ver portatiles</a>
+  <a class="btn btn-2">Ver Moviles</a>
+  <a class="btn btn-3">Ver Tablets</a> 
+</div>
+	
+		<div class="container page-wrapper">
+		<div class="page-inner">
+			<div class="row">
+				<c:forEach items="${pageScope.listaPro}" var="producto">
+					<div class="el-wrapper">
+						<div class="box-up">
+							<img class="img" src="<c:url value="${producto.rutaImagen}"/>"
+								width="250px;" alt="">
+							<div class="img-info">
+								<div class="info-inner">
+									<span class="p-name"><c:out
+											value="${producto.descripcion}"></c:out></span> <span
+										class="p-company"></span>
+								</div>
+								<div class="a-size">
+									Stock: <span class="size"></span>
+									<c:out value="${producto.stock}"></c:out>
 								</div>
 							</div>
-						</a>
+						</div>
+
+						<div class="box-down">
+							<div class="h-bg">
+								<div class="h-bg-inner"></div>
+							</div>
+
+							<a class="cart" href="ControllerProductoId?idProducto=<c:out value="${producto.id}"></c:out>"> <span class="price"><c:out
+										value="${producto.precioUnitarioSinIva}"></c:out></span> <span
+								class="add-to-cart"> <span class="txt">Add in cart</span>
+							</span>
+							</a>
+						</div>
+
 					</div>
-				</div>
-			</c:forEach>
+				</c:forEach>
+			</div>
+
 		</div>
+
 	</div>
 
 

@@ -14,6 +14,13 @@
 </head>
 
 <body>
+
+	<%
+		HttpSession mySession = request.getSession();
+	if (mySession.getAttribute("persona") != null) {
+		mySession.invalidate();
+	}
+	%>
 	
 	<%@include file="includes/nav.jsp" %>
 

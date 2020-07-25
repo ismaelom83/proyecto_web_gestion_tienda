@@ -2,7 +2,7 @@ package proyecto_web_gestion_tienda.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,8 +16,6 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import antlr.collections.List;
-import empresa.modelo.OpreracionesTrabajadores;
 import proyecto_web_gestion_tienda.model.CabeceraPedido;
 import proyecto_web_gestion_tienda.model.DetallePedido;
 import proyecto_web_gestion_tienda.model.Persona;

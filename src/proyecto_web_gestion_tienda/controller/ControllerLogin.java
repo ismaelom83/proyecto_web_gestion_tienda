@@ -45,28 +45,31 @@ public class ControllerLogin extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		ArrayList<Persona> aPersonas;
 		ArrayList<Producto> aProducto;
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 
 		Persona personas = OperacionesDB.logIn(session, email, password);
-		aPersonas = OperacionesDB.mostraTodasPersonas(session);
+	
 		aProducto = OperacionesDB.mostraTodoslosproductos();
 
 		if (personas != null) {
 
-			request.setAttribute("todasPersonas", aPersonas);
+//			request.setAttribute("todasPersonas", aPersonas);
 			switch (personas.getTipoPersona()) {
 			case " A":
-				request.setAttribute("persona", personas);
-				request.setAttribute("todasPersonas", aPersonas);
-				request.getRequestDispatcher("trabajadorCompras.jsp").forward(request, response);
+				HttpSession mySession3 = request.getSession(true);
+				mySession3.setAttribute("persona", personas.getNombre() + ' ' + personas.getApellido1());
+				mySession3.setAttribute("personaCompleta", personas);
+//				request.setAttribute("todasPersonas", aPersonas);
+				response.sendRedirect("ControllerTrabajadorCompras");
 				logger.info(String.format("Trabajador compras logeado.", methodName));
 				break;
 			case " T":
-				request.setAttribute("persona", personas);
-				request.setAttribute("todasPersonas", aPersonas);
+				HttpSession mySession4 = request.getSession(true);
+				mySession4.setAttribute("persona", personas);
+//				request.setAttribute("persona", personas);
+//				request.setAttribute("todasPersonas", aPersonas);
 				request.getRequestDispatcher("trabajadorVentas.jsp").forward(request, response);
 				logger.info(String.format("Trabajador ventas logeado.", methodName));
 				break;
@@ -88,15 +91,29 @@ public class ControllerLogin extends HttpServlet {
 					System.out.println("la lista del no logeado " + listaLogeada2);
 					logger.info(String.format("Cliente normal logeado.", methodName));
 				}
-				
-				
+						
 				break;
 			case " C":
-				request.setAttribute("todasPersonas", aPersonas);
-				request.getRequestDispatcher("clientePremium.jsp").forward(request, response);
-				logger.info(String.format("Cliente premium logeado.", methodName));
+				HttpSession mySession2 = request.getSession(true);
+				@SuppressWarnings("unchecked")
+				ArrayList<Producto> listaLogeada = (ArrayList<Producto>) mySession2.getAttribute("listaLogeada");
+				if (mySession2.getAttribute("listaLogeada")!=null) {
+					mySession2.setAttribute("persona", personas.getNombre() + ' ' + personas.getApellido1());
+					mySession2.setAttribute("personaCompleta", personas);
+					response.sendRedirect("http://localhost:8080/proyecto_web_gestion_tienda/ControllerCarrito");
+					System.out.println("la lista del no logeado " + listaLogeada);
+				}else {
+					mySession2.setAttribute("persona", personas.getNombre() + ' ' + personas.getApellido1());
+					mySession2.setAttribute("personaCompleta", personas);
+//					mySession.setAttribute("todosProductos", aProducto);
+					response.sendRedirect("http://localhost:8080/proyecto_web_gestion_tienda/ControllerCliente");
+					System.out.println("la lista del no logeado " + listaLogeada);
+					logger.info(String.format("Cliente normal logeado.", methodName));
+				}
 				break;
 			case " H":
+				HttpSession mySession6 = request.getSession(true);
+				mySession6.setAttribute("persona", personas);
 				request.getRequestDispatcher("administrador.jsp").forward(request, response);
 				logger.info(String.format("Administrador logeado.", methodName));
 				break;

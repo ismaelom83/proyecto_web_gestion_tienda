@@ -19,6 +19,7 @@ import proyecto_web_gestion_tienda.model.Producto;
 import proyecto_web_gestion_tienda.service.OperacionesDB;
 import proyecto_web_gestion_tienda.utils.HibernateUtil;
 
+
 @WebServlet("/ControllerCliente")
 public class ControllerCliente  extends HttpServlet{
 
@@ -26,9 +27,9 @@ public class ControllerCliente  extends HttpServlet{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-//	Session session = HibernateUtil.getSessionFactory().openSession();
-//	private static Logger logger = LogManager.getLogger(ControllerLogin.class);
-//	static SessionFactory sessionFactory;
+	Session session = HibernateUtil.getSessionFactory().openSession();
+	private static Logger logger = LogManager.getLogger(ControllerLogin.class);
+	static SessionFactory sessionFactory;
 	
 	@Override
 	public void init() throws ServletException {
@@ -39,11 +40,23 @@ public class ControllerCliente  extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		HttpSession mySession = request.getSession(true);
+		HttpSession mySession = request.getSession(true);
 		ArrayList<Producto> aProductos2 ;
-		aProductos2 = OperacionesDB.mostraTodoslosproductos();
+		String categoria = request.getParameter("categoria");
+		if (categoria!=null) {
+		aProductos2 =	OperacionesDB.buscarPructoCaregoria(categoria);
+		} else {
+			aProductos2 = OperacionesDB.mostraTodoslosproductos();		
+		}
+		
+//	Persona p =	(Persona) mySession.getAttribute("personaCompleta");
+//System.out.println(p.getId());
+//	Cliente categoriaCliente = OperacionesDB.buscarCategoriaCliente(p.getId());
+//	mySession.setAttribute("categoriaCliente", categoriaCliente.getCategoria());
 		request.setAttribute("todosProductos2", aProductos2);
 		request.getRequestDispatcher("clienteNormal.jsp").forward(request, response);
+		logger.info(String.format("Cliente normal logeado."));
+		
 	}
 
 	@Override

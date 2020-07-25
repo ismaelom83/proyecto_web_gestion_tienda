@@ -37,6 +37,8 @@ public class Producto implements Serializable {
 	private int stock;
 	
 	private int cantidad;
+	
+	private String categoria;
 
 	//bi-directional many-to-one association to DetallePedido
 	@OneToMany(mappedBy="producto")
@@ -47,6 +49,18 @@ public class Producto implements Serializable {
 	private ValoracionesProducto valoracionesProducto;
 	
 	
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+
+
 
 	public Producto() {
 	}
@@ -167,7 +181,6 @@ public class Producto implements Serializable {
 
 
 
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -175,6 +188,7 @@ public class Producto implements Serializable {
 		result = prime * result + borradoLogico;
 		result = prime * result + canjeable;
 		result = prime * result + cantidad;
+		result = prime * result + ((categoria == null) ? 0 : categoria.hashCode());
 		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
 		result = prime * result + descuento;
 		result = prime * result + ((detallePedidos == null) ? 0 : detallePedidos.hashCode());
@@ -185,7 +199,6 @@ public class Producto implements Serializable {
 		result = prime * result + ((valoracionesProducto == null) ? 0 : valoracionesProducto.hashCode());
 		return result;
 	}
-
 
 
 
@@ -203,6 +216,11 @@ public class Producto implements Serializable {
 		if (canjeable != other.canjeable)
 			return false;
 		if (cantidad != other.cantidad)
+			return false;
+		if (categoria == null) {
+			if (other.categoria != null)
+				return false;
+		} else if (!categoria.equals(other.categoria))
 			return false;
 		if (descripcion == null) {
 			if (other.descripcion != null)
@@ -237,14 +255,18 @@ public class Producto implements Serializable {
 
 
 
-
 	@Override
 	public String toString() {
-		return "Producto [id=" + id + ", cantidad=" + cantidad + ", borradoLogico=" + borradoLogico + ", canjeable="
-				+ canjeable + ", descripcion=" + descripcion + ", descuento=" + descuento + ", precioUnitarioSinIva="
-				+ precioUnitarioSinIva + ", rutaImagen=" + rutaImagen + ", stock=" + stock + ", detallePedidos="
-				+ detallePedidos + ", valoracionesProducto=" + valoracionesProducto + "]";
+		return "Producto [id=" + id + ", borradoLogico=" + borradoLogico + ", canjeable=" + canjeable + ", descripcion="
+				+ descripcion + ", descuento=" + descuento + ", precioUnitarioSinIva=" + precioUnitarioSinIva
+				+ ", rutaImagen=" + rutaImagen + ", stock=" + stock + ", cantidad=" + cantidad + ", categoria="
+				+ categoria + ", detallePedidos=" + detallePedidos + ", valoracionesProducto=" + valoracionesProducto
+				+ "]";
 	}
+
+
+
+
 
 
 	

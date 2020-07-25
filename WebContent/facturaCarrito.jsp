@@ -20,7 +20,7 @@
 	<%@include file="includes/nav.jsp"%>
 
 	<%
-		Date dNow = new Date();
+	Date dNow = new Date();
 	SimpleDateFormat ft = new SimpleDateFormat("MM/dd/yyyy");
 	String currentDate = ft.format(dNow);
 	%>
@@ -40,8 +40,7 @@
 				<div class="row">
 					<div class="col-xs-6">
 						<address>
-							<strong>Comprado por:</strong><br>
-							<span>${sessionScope.persona}</span><br>
+							<strong>Comprado por:</strong><br> <span>${sessionScope.persona}</span><br>
 						</address>
 					</div>
 					<div class="col-xs-6 text-right">
@@ -94,17 +93,17 @@
 					</div>
 				</div>
 			</div>
-				<a href="ControllerCliente" class="btn btn-success"  >vover a comprar</a>
+			<a href="ControllerCliente" class="btn btn-success">vover a
+				comprar</a>
 		</div>
 	</div>
 
 
 	<%
 		HttpSession mySession = request.getSession();
-    
-		mySession.removeAttribute("productoCarritoLista");
-		mySession.removeAttribute("listaLogeada");
 
+	mySession.removeAttribute("productoCarritoLista");
+	mySession.removeAttribute("listaLogeada");
 	%>
 
 	<br>

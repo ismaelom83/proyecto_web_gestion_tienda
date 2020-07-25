@@ -18,11 +18,19 @@
 </head>
 <body>
 
+	<%
+		HttpSession mySession = request.getSession();
+	if (mySession.getAttribute("persona")==null) {
+		response.sendRedirect(request.getContextPath() + "/login.jsp");
+	}
+	%>
 
 	<%
 		ArrayList<Producto> listaPro = (ArrayList<Producto>) request.getAttribute("todosProductos2");
 	pageContext.setAttribute("listaPro", listaPro);
 	%>
+	
+	
 
 
 <%@include file="includes/navPrincipal.jsp"%>
@@ -90,9 +98,11 @@
     </div>
     </div>
    <div class="container">
-  <a class="btn btn-1">Ver portatiles</a>
-  <a class="btn btn-2">Ver Moviles</a>
-  <a class="btn btn-3">Ver Tablets</a> 
+  <a href="ControllerCliente?categoria=portatiles" class="btn botonesIr btn-1">Ver portatiles</a>
+  <a href="ControllerCliente?categoria=monitores" class="btn  botonesIr btn-2">Ver Monitores</a>
+  <a href="ControllerCliente?categoria=televisiones" class="btn botonesIr btn-3">Ver Televisiones</a> 
+  <a href="ControllerCliente"
+			class="btn botonesIr btn-4">Ver Todos</a>
 </div>
 	
 		<div class="container page-wrapper">

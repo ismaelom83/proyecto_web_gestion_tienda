@@ -18,16 +18,14 @@
 
 
 
-
-	<%@include file="includes/nav.jsp"%>
-
-
 	<%
 		HttpSession mySession = request.getSession();
 	ArrayList<Producto> listaP = (ArrayList<Producto>) mySession.getAttribute("productoCarritoLista");
 	pageContext.setAttribute("listaP", listaP);
 
 	%>
+	
+	<%@include file="includes/nav.jsp"%>
 
 	<div class="container">
 		<c:if test="${sessionScope.productoCarritoLista==null}">

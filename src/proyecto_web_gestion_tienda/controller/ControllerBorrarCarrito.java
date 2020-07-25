@@ -1,7 +1,6 @@
 package proyecto_web_gestion_tienda.controller;
 
 import java.io.IOException;
-import java.nio.channels.SeekableByteChannel;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -17,7 +16,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import proyecto_web_gestion_tienda.model.Producto;
-import proyecto_web_gestion_tienda.service.OperacionesDB;
 import proyecto_web_gestion_tienda.utils.HibernateUtil;
 
 @WebServlet("/ControllerBorrarCarrito")

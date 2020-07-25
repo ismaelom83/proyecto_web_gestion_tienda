@@ -16,6 +16,10 @@
 	
 	<%@include file="includes/nav.jsp"%>
 	<%
+	HttpSession mySession = request.getSession();
+if (mySession.getAttribute("persona")==null) {
+	response.sendRedirect(request.getContextPath() + "/login.jsp");
+}
 		ArrayList<CabeceraPedido> cabeceraPedidos = (ArrayList<CabeceraPedido>) request.getAttribute("cabeceraPedidos");
 	pageContext.setAttribute("misPedidos", cabeceraPedidos);
 	%>

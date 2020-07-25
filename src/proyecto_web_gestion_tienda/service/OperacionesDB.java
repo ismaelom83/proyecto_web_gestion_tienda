@@ -11,6 +11,7 @@ import org.hibernate.query.Query;
 
 import proyecto_web_gestion_tienda.controller.ControllerLogin;
 import proyecto_web_gestion_tienda.model.CabeceraPedido;
+import proyecto_web_gestion_tienda.model.Cliente;
 import proyecto_web_gestion_tienda.model.DetallePedido;
 import proyecto_web_gestion_tienda.model.Persona;
 import proyecto_web_gestion_tienda.model.Producto;
@@ -25,9 +26,9 @@ public class OperacionesDB {
 		String hQuery = "from Persona p " + " where p.mail = :email" + " and p.pass = :pass";
 		Persona p = s.createQuery(hQuery, Persona.class).setParameter("email", email).setParameter("pass", pass)
 				.setMaxResults(1).uniqueResult();
-		System.out.println(p);
 		if (p != null) {
 			System.out.println("login exitoso");
+			logger.info(String.format("Cliente normal logeado."));
 			return p;
 		} else {
 			System.out.println("credenciales no validas");
@@ -36,8 +37,9 @@ public class OperacionesDB {
 
 	}
 
-	public static ArrayList<Persona> mostraTodasPersonas(Session session) {
-//			List<String> aProductos;
+	public static ArrayList<Persona> mostraTodasPersonas() {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
 		String hQuery = " from Persona p";
 		Query query = session.createQuery(hQuery);
 		ArrayList<Persona> aProductos = (ArrayList<Persona>) query.list();
@@ -167,5 +169,34 @@ public class OperacionesDB {
 		return null;
 
 	}
+	
+	public static ArrayList<Producto> buscarPructoCaregoria(String categoria) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		String hQuery = " from Producto pro where pro.categoria = '" + categoria + "'";
+		Query query = session.createQuery(hQuery);
+		@SuppressWarnings("unchecked")
+		ArrayList<Producto> aProductos = (ArrayList<Producto>) query.list();
+		if (aProductos != null) {
+			return aProductos;
+		} else {
+//			System.out.println("credenciales no validas");
+		}
+		return null;
+
+	}
+	
+	public static Cliente buscarCategoriaCliente(int id) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		String hQuery = " from Cliente c " + "  where c.persona =:persona";
+		Cliente cli =  session.createQuery(hQuery, Cliente.class).setParameter("persona", id).setMaxResults(1).uniqueResult();
+		if (cli!=null) {
+			return cli;
+		}else {
+		System.out.println("categoria no encontrada");	
+		}
+		return null;
+	} 
 
 }

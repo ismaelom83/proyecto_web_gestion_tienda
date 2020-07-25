@@ -17,7 +17,7 @@ public class Cliente implements Serializable {
 	@Id
 	private int id;
 
-	private int categoria;
+	private String categoria;
 
 	private int puntos;
 
@@ -43,11 +43,11 @@ public class Cliente implements Serializable {
 		this.id = id;
 	}
 
-	public int getCategoria() {
+	public String getCategoria() {
 		return this.categoria;
 	}
 
-	public void setCategoria(int categoria) {
+	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
 

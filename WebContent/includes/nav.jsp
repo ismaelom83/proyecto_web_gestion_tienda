@@ -15,7 +15,7 @@
 		<a href="ControllerIndex" class="navbar-brand"><img alt="Logo"  width="100px" height="40px" src="./img/logo-pccomponentes.jpg"></a>
 	</c:if>
 	<c:if test="${sessionScope.persona!=null}">
-		<a href="ControllerCliente" class="navbar-brand"><img alt="Logo"  width="100px" height="40px" src="./img/logo-pccomponentes.jpg"></a>
+		<a href="#" class="navbar-brand"><img alt="Logo"  width="100px" height="40px" src="./img/logo-pccomponentes.jpg"></a>
 	</c:if>
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
@@ -24,15 +24,20 @@
 					<li><a href="ControllerMisPedidos">MisPedidos</a></li>
 				</c:if>
 				<c:if test="${sessionScope.persona!=null}">
+					<li><a href="ControllerCliente">Volver Zona Compra</a></li>
+				</c:if>
+				<c:if test="${sessionScope.persona!=null}">
 					<li><a>Bienvenido: ${sessionScope.persona}</a></li>
 				</c:if>
+			
+				
 			</ul>
 
-	<ul class="navbar-nav mr-auto">
-			<c:if test="${sessionScope.persona!=null}">
-				Bienvenido: ${sessionScope.persona}
-			</c:if>
-		</ul>
+<!-- 	<ul class="navbar-nav mr-auto"> -->
+<%-- 			<c:if test="${sessionScope.persona!=null}"> --%>
+<%-- 				Bienvenido: ${sessionScope.persona} --%>
+<%-- 			</c:if> --%>
+<!-- 		</ul> -->
 
 			<ul class="nav navbar-nav navbar-right">
 				<c:if test="${sessionScope.persona!=null}">

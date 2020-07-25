@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -48,13 +46,12 @@ public class ControllerIndex extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		ArrayList<Producto> aProducto;	
-		//Session session = HibernateUtil.buildSessionFactory().openSession();
-		
+		HttpSession mySession=request.getSession();
+		ArrayList<Producto> aProducto;		
 		aProducto = OperacionesDB.mostraTodoslosproductos();	
-		request.setAttribute("todosProductos", aProducto);
+		mySession.setAttribute("todosProductos", aProducto);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
+		logger.info(String.format("Cliente normal logeado."));
 	}
 
 }

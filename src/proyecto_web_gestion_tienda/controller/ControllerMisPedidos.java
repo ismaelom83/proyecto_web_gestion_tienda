@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import proyecto_web_gestion_tienda.model.CabeceraPedido;
 import proyecto_web_gestion_tienda.model.DetallePedido;
 import proyecto_web_gestion_tienda.model.Persona;
-import proyecto_web_gestion_tienda.model.Producto;
 import proyecto_web_gestion_tienda.service.OperacionesDB;
 
 @WebServlet("/ControllerMisPedidos")

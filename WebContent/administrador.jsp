@@ -17,7 +17,7 @@
 </head>
 <body>
 	<%@include file="includes/navPrincipal.jsp"%>
-
+<h1>bienvenido administrador</h1>
   <div class="container">     
         <div class="section" id="carousel">
         <div class="container">

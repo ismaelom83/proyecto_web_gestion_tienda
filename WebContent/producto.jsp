@@ -13,7 +13,11 @@
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+
+
+
 	<%@include file="includes/nav.jsp"%>
+	
 	<div class="container">
 		<div class="row">
 			<div class="col-md-offset-1 col-md-8">
@@ -35,7 +39,7 @@
 					<br>
 					<div class="pull-right">
 						<h4>
-							<strong> ${productoId.precioUnitarioSinIva} </strong>
+							<strong>Precio:  ${productoId.precioUnitarioSinIva} </strong>
 						</h4>
 					</div>
 					<c:if test="${sessionScope.persona!=null}">

@@ -21,6 +21,9 @@
 
 	<%
 	HttpSession mySession = request.getSession();
+	if (mySession.getAttribute("persona")==null) {
+		response.sendRedirect(request.getContextPath() + "/login.jsp");
+	}
 	ArrayList<DetallePedido> lineasPedido2 = (ArrayList<DetallePedido>) request.getAttribute("lineasPedido");
 	pageContext.setAttribute("listaPedido3", lineasPedido2);
 	int totalCompra = (int) request.getAttribute("sTotal");

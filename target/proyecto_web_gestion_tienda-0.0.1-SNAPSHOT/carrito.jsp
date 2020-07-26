@@ -18,16 +18,14 @@
 
 
 
-
-	<%@include file="includes/nav.jsp"%>
-
-
 	<%
 		HttpSession mySession = request.getSession();
 	ArrayList<Producto> listaP = (ArrayList<Producto>) mySession.getAttribute("productoCarritoLista");
 	pageContext.setAttribute("listaP", listaP);
-	
+
 	%>
+	
+	<%@include file="includes/nav.jsp"%>
 
 	<div class="container">
 		<c:if test="${sessionScope.productoCarritoLista==null}">
@@ -74,7 +72,7 @@
 												value="${pro.cantidad}"></c:out></strong></td>
 								
 									<td class="col-md-1"><a
-										href="BorrarCarrito?idProductoBorrar=<c:out value="${pro.id}"></c:out>&cantidad=${pro.cantidad}"
+										href="ControllerBorrarCarrito?idProductoBorrar=<c:out value="${pro.id}"></c:out>&cantidad=${pro.cantidad}"
 										class="btn btn-danger"> <span
 											class="glyphicon glyphicon-remove"></span> Eliminar
 									</a></td>

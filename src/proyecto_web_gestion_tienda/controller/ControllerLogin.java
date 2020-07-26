@@ -1,6 +1,7 @@
 package proyecto_web_gestion_tienda.controller;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import proyecto_web_gestion_tienda.model.Persona;
@@ -44,7 +46,11 @@ public class ControllerLogin extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		ClassLoader loader = Thread.currentThread().getContextClassLoader();
+    	URL appResourceURL = loader.getResource("log4java.properties");
+    	String dbConfigFileRoute = appResourceURL.getPath();
+    	
+		PropertyConfigurator.configure(dbConfigFileRoute);
 		ArrayList<Producto> aProducto;
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -61,9 +67,9 @@ public class ControllerLogin extends HttpServlet {
 				HttpSession mySession3 = request.getSession(true);
 				mySession3.setAttribute("persona", personas.getNombre() + ' ' + personas.getApellido1());
 				mySession3.setAttribute("personaCompleta", personas);
-//				request.setAttribute("todasPersonas", aPersonas);
 				response.sendRedirect("ControllerTrabajadorCompras");
 				logger.info(String.format("Trabajador compras logeado.", methodName));
+				logger.warn("Te has logeado correctamente");
 				break;
 			case " T":
 				HttpSession mySession4 = request.getSession(true);
@@ -72,6 +78,7 @@ public class ControllerLogin extends HttpServlet {
 //				request.setAttribute("todasPersonas", aPersonas);
 				request.getRequestDispatcher("trabajadorVentas.jsp").forward(request, response);
 				logger.info(String.format("Trabajador ventas logeado.", methodName));
+				logger.warn("Te has logeado correctamente");
 				break;
 			case "CN":
 				HttpSession mySession = request.getSession(true);
@@ -82,7 +89,7 @@ public class ControllerLogin extends HttpServlet {
 					mySession.setAttribute("persona", personas.getNombre() + ' ' + personas.getApellido1());
 					mySession.setAttribute("personaCompleta", personas);
 					response.sendRedirect("http://localhost:8080/proyecto_web_gestion_tienda/ControllerCarrito");
-					System.out.println("la lista del no logeado " + listaLogeada2);
+					logger.warn("Te has logeado correctamente");
 				}else {
 					mySession.setAttribute("persona", personas.getNombre() + ' ' + personas.getApellido1());
 					mySession.setAttribute("personaCompleta", personas);
@@ -90,10 +97,11 @@ public class ControllerLogin extends HttpServlet {
 					response.sendRedirect("http://localhost:8080/proyecto_web_gestion_tienda/ControllerCliente");
 					System.out.println("la lista del no logeado " + listaLogeada2);
 					logger.info(String.format("Cliente normal logeado.", methodName));
+					logger.warn("Te has logeado correctamente");
 				}
 						
 				break;
-			case " C":
+			case "CP":
 				HttpSession mySession2 = request.getSession(true);
 				@SuppressWarnings("unchecked")
 				ArrayList<Producto> listaLogeada = (ArrayList<Producto>) mySession2.getAttribute("listaLogeada");
@@ -101,7 +109,7 @@ public class ControllerLogin extends HttpServlet {
 					mySession2.setAttribute("persona", personas.getNombre() + ' ' + personas.getApellido1());
 					mySession2.setAttribute("personaCompleta", personas);
 					response.sendRedirect("http://localhost:8080/proyecto_web_gestion_tienda/ControllerCarrito");
-					System.out.println("la lista del no logeado " + listaLogeada);
+					logger.warn("Te has logeado correctamente");
 				}else {
 					mySession2.setAttribute("persona", personas.getNombre() + ' ' + personas.getApellido1());
 					mySession2.setAttribute("personaCompleta", personas);
@@ -109,6 +117,7 @@ public class ControllerLogin extends HttpServlet {
 					response.sendRedirect("http://localhost:8080/proyecto_web_gestion_tienda/ControllerCliente");
 					System.out.println("la lista del no logeado " + listaLogeada);
 					logger.info(String.format("Cliente normal logeado.", methodName));
+					logger.warn("Te has logeado correctamente");
 				}
 				break;
 			case " H":
@@ -116,16 +125,19 @@ public class ControllerLogin extends HttpServlet {
 				mySession6.setAttribute("persona", personas);
 				request.getRequestDispatcher("administrador.jsp").forward(request, response);
 				logger.info(String.format("Administrador logeado.", methodName));
+				logger.warn("Te has logeado correctamente");
 				break;
 			default:
 				request.getRequestDispatcher("error.jsp").forward(request, response);
 				logger.info(String.format("Error al logearse.", methodName));
+				logger.warn("Te has logeado correctamente");
 				break;
 			}
 
 		} else {
 			request.getRequestDispatcher("error.jsp").forward(request, response);
 			logger.info(String.format("Error al logearse.", methodName));
+			logger.warn("Te has logeado correctamente");
 
 		}
 

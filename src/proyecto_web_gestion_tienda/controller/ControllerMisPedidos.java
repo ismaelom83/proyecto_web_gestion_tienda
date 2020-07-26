@@ -1,6 +1,7 @@
 package proyecto_web_gestion_tienda.controller;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import proyecto_web_gestion_tienda.model.CabeceraPedido;
 import proyecto_web_gestion_tienda.model.DetallePedido;
@@ -22,6 +27,7 @@ public class ControllerMisPedidos extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static Logger logger = LogManager.getLogger(ControllerMisPedidos.class);
 
 	@Override
 	public void init() throws ServletException {
@@ -32,6 +38,11 @@ public class ControllerMisPedidos extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		ClassLoader loader = Thread.currentThread().getContextClassLoader();
+    	URL appResourceURL = loader.getResource("log4java.properties");
+    	String dbConfigFileRoute = appResourceURL.getPath();
+    	
+		PropertyConfigurator.configure(dbConfigFileRoute);
 
 		HttpSession mySession = request.getSession();
 		ArrayList<CabeceraPedido> cabeceraPedido = null;

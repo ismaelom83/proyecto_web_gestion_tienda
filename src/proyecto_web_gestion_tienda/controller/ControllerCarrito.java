@@ -1,6 +1,7 @@
 package proyecto_web_gestion_tienda.controller;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -32,7 +34,7 @@ public class ControllerCarrito extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	Session session = HibernateUtil.getSessionFactory().openSession();
-	private static Logger logger = LogManager.getLogger(ControllerLogin.class);
+	private static Logger logger = LogManager.getLogger(ControllerCarrito.class);
 	static SessionFactory sessionFactory;
 
 	@Override
@@ -44,6 +46,11 @@ public class ControllerCarrito extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		ClassLoader loader = Thread.currentThread().getContextClassLoader();
+    	URL appResourceURL = loader.getResource("log4java.properties");
+    	String dbConfigFileRoute = appResourceURL.getPath();
+    	
+		PropertyConfigurator.configure(dbConfigFileRoute);
 		HttpSession mySession = request.getSession();
 		int sumaTotal = 0;
 		try {

@@ -15,7 +15,9 @@
 <body>
 <%@include file="includes/nav.jsp" %>
 
-<%Persona p = (Persona)request.getAttribute("persona"); ArrayList<Persona> lista = (ArrayList<Persona>)request.getAttribute("todosProductos");%>
+<%
+HttpSession mySession = request.getSession(true);
+Persona p = (Persona)mySession.getAttribute("persona"); ArrayList<Persona> lista = (ArrayList<Persona>)request.getAttribute("todosProductos");%>
 <h1>bienvenido al menu de los trabajadores de Ventas</h1>
 <h1>Hola: <% out.println(p.getNombre());  %><% out.println(p.getApellido1()); %> tu email es: <% out.println(p.getMail()); %> eres un trabajador tipo<% out.println(p.getTipoPersona()); %></h1>
 <%-- <h2>El descuento es: <% out.println(l); %></h2> --%>

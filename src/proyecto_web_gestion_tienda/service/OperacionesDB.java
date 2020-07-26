@@ -198,5 +198,19 @@ public class OperacionesDB {
 		}
 		return null;
 	} 
+	
+	public static ArrayList<Persona> buscarTipoCliente(String cliente1, String cliente2) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		String hQuery = " from Persona p where p.tipoPersona='"+cliente1+"'" + " or p.tipoPersona='"+cliente2+"'";
+		Query query =  session.createQuery(hQuery);
+		ArrayList<Persona> clientesTipo = (ArrayList<Persona>) query.list();
+		if (clientesTipo!=null) {
+			return clientesTipo;
+		}else {
+		System.out.println("categoria no encontrada");	
+		}
+		return null;
+	}
 
 }

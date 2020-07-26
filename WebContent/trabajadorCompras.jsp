@@ -94,15 +94,6 @@ pageContext.setAttribute("lista", lista);
 			</form>
 
 			<ul class="nav navbar-nav navbar-right">
-				<c:if test="${sessionScope.persona!=null}">
-					<li style="margin-right: 20px;"><a
-						class="nav-item active nav-link" href="carrito.jsp"><img
-							alt="carrito" width="40px" height="40px"
-							src="./img/baseline_shopping_cart_black_18dp.png"></a></li>
-				</c:if>
-
-
-
 				<li><a class="nav-item active nav-link" href="ControllerLogout">
 						<img alt="" src="./img/Human-gnome-logout.svg.png" width="40px"
 						height="40px">
@@ -114,47 +105,49 @@ pageContext.setAttribute("lista", lista);
 
 	<div class="container">
 		<div class=" main-section mb-3">
-				<div class="tab-pane fade show " id="list" role="tabpanel"
-					aria-labelledby="list-tab">
-					<div class="card bg-secondary text-light">
-						<div class="card-header  col-sm-10">
-							<h4>Lista De Clientes</h4>
-						</div>
-						<div class="card-body ">
-							<div class="table-responsive">
-								<table id="userList" class="table">
-									<thead>
+			<div class="tab-pane fade show " id="list" role="tabpanel"
+				aria-labelledby="list-tab">
+				<div class="card bg-secondary text-light">
+					<div class="card-header  col-sm-10">
+						<h4>Lista De Clientes</h4>
+					</div>
+					<div class="card-body ">
+						<div class="table-responsive">
+							<table id="userList" class="table">
+								<thead>
+									<tr>
+										<th>Nombre</th>
+										<th>Apellido</th>
+										<th>DNI</th>
+										<th>Email</th>
+										<th>Tipo Persona</th>
+										<th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${pageScope.lista}" var="persona">
 										<tr>
-											<th>Nombre</th>
-											<th>Apellido</th>
-											<th>DNI</th>
-											<th>Email</th>
-											<th>Tipo Persona</th>
+											<td><c:out value="${persona.nombre}"></c:out></td>
+											<td><c:out value="${persona.apellido1}"></c:out></td>
+											<td><c:out value="${persona.dni}"></c:out></td>
+											<td><c:out value="${persona.mail}"></c:out></td>
+											<td><c:out value="${persona.tipoPersona}"></c:out></td>
+											<td><a href="ControllerTrabajadorCompras?idClientePedido=<c:out value="${persona.id}"></c:out>" type="button">Ver Pedidos</a></td>
 										</tr>
-									</thead>
-									<tbody>
-										<c:forEach items="${pageScope.lista}" var="persona">
-											<tr>
-												<td><c:out value="${persona.nombre}"></c:out></td>
-												<td><c:out value="${persona.apellido1}"></c:out></td>
-												<td><c:out value="${persona.dni}"></c:out></td>
-												<td><c:out value="${persona.mail}"></c:out></td>
-												<td><c:out value="${persona.tipoPersona}"></c:out></td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
+									</c:forEach>
+								</tbody> 
+							</table>
 						</div>
 					</div>
 				</div>
-				</div>
-				</div>
+			</div>
+		</div>
+	</div>
 
 
 
 
 
-				<%@include file="includes/footer.jsp"%>
+	<%@include file="includes/footer.jsp"%>
 </body>
 </html>

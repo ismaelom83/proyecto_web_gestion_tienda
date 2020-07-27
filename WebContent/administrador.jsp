@@ -1,8 +1,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="proyecto_web_gestion_tienda.model.Producto"%>
 <%@page import="java.util.HashMap"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1" --%>
+<%-- 	pageEncoding="ISO-8859-1"%> --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>

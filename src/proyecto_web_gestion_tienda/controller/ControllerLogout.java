@@ -32,7 +32,7 @@ public class ControllerLogout extends HttpServlet{
 		PropertyConfigurator.configure(dbConfigFileRoute);
 		HttpSession mySession=request.getSession();  
         mySession.invalidate();  
-        response.sendRedirect(request.getContextPath() + "/ControllerIndex");
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class ControllerLogout extends HttpServlet{
 		
 		 HttpSession mySession=request.getSession();  
          mySession.invalidate();  
-         response.sendRedirect(request.getContextPath() + "/ControllerIndex");
+         response.sendRedirect(request.getContextPath() + "/login.jsp");
 	}
 
 	@Override

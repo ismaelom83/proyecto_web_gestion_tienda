@@ -133,7 +133,7 @@
 
 							<a class="cart" href="ControllerProductoId?idProducto=<c:out value="${producto.id}"></c:out>"> <span class="price"><c:out
 										value="${producto.precioUnitarioSinIva}"></c:out></span> <span
-								class="add-to-cart"> <span class="txt">Add in cart</span>
+								class="add-to-cart"> <span class="txt">Ver producto</span>
 							</span>
 							</a>
 						</div>

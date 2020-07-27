@@ -65,9 +65,6 @@ pageContext.setAttribute("lista", lista);
 
 
 <body>
-
-
-
 	<nav class="navbar navbar-expand navbar-light bg-light">
 		<a href="#" class="navbar-brand"><img alt="Logo" width="100px"
 			height="40px" src="./img/logo-pccomponentes.jpg"></a>

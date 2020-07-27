@@ -24,17 +24,18 @@ if (mySession.getAttribute("persona")==null) {
 	pageContext.setAttribute("misPedidos", cabeceraPedidos);
 	%>
 
-<!-- 	<div class="container"> -->
-<!-- 		<div class="row"> -->
-<!-- 			<div class="col-md-offset-1 col-md-10"> -->
-<!-- 				<div class="jumbotron"> -->
-<!-- 					<div class="container"> -->
-<!-- 						<h2 class="text-center">Aún no ha seleccionado ningún -->
-<!-- 							producto para comprar</h2> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
+	<div class="container">
+	<c:if test="${pageScope.misPedidos==null}">
+		<div class="row">
+			<div class="col-md-offset-1 col-md-10">
+				<div class="jumbotron">
+					<div class="container">
+						<h2 class="text-center">Aún no tienes ningun pedido</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+		</c:if>
 		<div class="row">
 			<div class="col-md-offset-4 col-md-4">
 				<table class="table table-striped">
@@ -61,9 +62,9 @@ if (mySession.getAttribute("persona")==null) {
 						</div></td>
 						<td><div>
 							<form
-								action="#"
-								method="">
-								<input type="hidden" name=""
+								action="ControllerDevolucionPedido"
+								method="get">
+								<input type="hidden" name="idPedido"
 									value="${pedidos.id}">
 								<button type="submit" class="btn btn-lg btn-danger btn-product">Devolver Pedido</button>
 							</form>
@@ -74,6 +75,7 @@ if (mySession.getAttribute("persona")==null) {
 				</table>
 
 			</div>
+		</div>
 		</div>
 	<br>
 	<br>

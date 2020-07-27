@@ -1,6 +1,7 @@
 package proyecto_web_gestion_tienda.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -13,6 +14,7 @@ import proyecto_web_gestion_tienda.controller.ControllerLogin;
 import proyecto_web_gestion_tienda.model.CabeceraPedido;
 import proyecto_web_gestion_tienda.model.Cliente;
 import proyecto_web_gestion_tienda.model.DetallePedido;
+import proyecto_web_gestion_tienda.model.Mensajeria;
 import proyecto_web_gestion_tienda.model.Persona;
 import proyecto_web_gestion_tienda.model.Producto;
 import proyecto_web_gestion_tienda.utils.HibernateUtil;
@@ -212,5 +214,63 @@ public class OperacionesDB {
 		}
 		return null;
 	}
+	
+	
+	
+	public static void insertarMensajesDevolucion(int idDestinatario, int idOrigen,String adjunto, String asunto,String cuerpo,int leido,int contestado) {
+		Transaction txn = session.beginTransaction();
+		Query query = session.createNativeQuery(
+				"INSERT INTO mensajeria  (id_destinatario, id_origen,adjunto,asunto,cuerpo,leido,contestado) VALUES(?,?,?,?,?,?,?)");
+		query.setParameter(1, idDestinatario);
+		query.setParameter(2, idOrigen);
+		query.setParameter(3, adjunto);
+		query.setParameter(4, asunto);
+		query.setParameter(5, cuerpo);
+		query.setParameter(6, leido);
+		query.setParameter(7, contestado);
+		query.executeUpdate();
+		txn.commit();
+
+	}
+	
+	public static ArrayList<Mensajeria> buscarDevoluconPedidos(int id) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		String hQuery = " from Mensajeria m where m.idDestinatario ='"+id+"'";
+		Query query =  session.createQuery(hQuery);
+		ArrayList<Mensajeria> devolucion = (ArrayList<Mensajeria>) query.list();
+		if (devolucion!=null) {
+			return devolucion;
+		}else {
+		System.out.println("producto no encontrado");	
+		}
+		return null;
+	}
+	
+	public static void borrarPedido(int id) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction txn = session.beginTransaction();
+		Query updateQuery = session
+				.createQuery("delete from CabeceraPedido ca where id ='"+id+"'");
+		updateQuery.executeUpdate();
+		txn.commit();
+	}
+	
+	public static ArrayList<Persona> buscarDepartamentoVentas(String tipo) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		String hQuery = " from Persona p where p.tipoPersona ='"+tipo+"'";
+		Query query =  session.createQuery(hQuery);
+		ArrayList<Persona> persona = (ArrayList<Persona>) query.list();
+		if (persona!=null) {
+			return persona;
+		}else {
+		System.out.println("producto no encontrado");	
+		}
+		return null;
+	}
+	
+	
 
 }

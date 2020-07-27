@@ -25,6 +25,10 @@
 				<li><a class="nav-item active nav-link"
 					href="ControllerCliente">Volver Zona Compra</a></li>
 			</c:if>
+					<c:if test="${sessionScope.persona!=null}">
+				<li><a class="nav-item active nav-link"
+					href="enviarMensaje.jsp">Enviar Mensaje</a></li>
+			</c:if>
 		</ul>
 	
 		

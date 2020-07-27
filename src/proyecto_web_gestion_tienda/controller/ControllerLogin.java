@@ -73,10 +73,11 @@ public class ControllerLogin extends HttpServlet {
 				break;
 			case " T":
 				HttpSession mySession4 = request.getSession(true);
-				mySession4.setAttribute("persona", personas);
+				mySession4.setAttribute("persona", personas.getNombre() + ' ' + personas.getApellido1());
+				mySession4.setAttribute("personaCompleta", personas);
 //				request.setAttribute("persona", personas);
 //				request.setAttribute("todasPersonas", aPersonas);
-				request.getRequestDispatcher("trabajadorVentas.jsp").forward(request, response);
+				response.sendRedirect("ControllerTrabajadorVentas");
 				logger.info(String.format("Trabajador ventas logeado.", methodName));
 				logger.warn("Te has logeado correctamente");
 				break;

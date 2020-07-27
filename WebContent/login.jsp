@@ -37,7 +37,7 @@
 						class="alert alert-danger col-sm-12"></div>
 
 					<form id="loginform" class="form-horizontal" method="POST"
-						action="http://localhost:8080/proyecto_web_gestion_tienda/ControllerLogin" role="form">
+						action="ControllerLogin" role="form">
 
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"><i
@@ -85,7 +85,7 @@
 				</div>
 				<div class="panel-body">
 					<form id="signupform" class="form-horizontal" role="form"
-						method="POST" enctype="multipart/form-data" action="#">
+						method="POST" enctype="multipart/form-data" action="login.jsp">
 
 						<div id="signupalert" style="display: none"
 							class="alert alert-danger">
@@ -93,10 +93,10 @@
 							<span></span>
 						</div>
 						<div class="form-group">
-							<label for="email" class="col-md-3 control-label">Email</label>
+							<label for="email" class="col-md-3 control-label"  >Email</label>
 							<div class="col-md-9">
 								<input type="text" class="form-control" name="email"
-									placeholder="Email">
+									placeholder="Email" required>
 							</div>
 						</div>
 

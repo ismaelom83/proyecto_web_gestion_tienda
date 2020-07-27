@@ -62,15 +62,7 @@ if (mySession.getAttribute("persona")==null) {
 								<button type="submit" class="btn btn-lg btn-success btn-product">Ver Pedido</button>
 							</form>
 						</div></td>
-						<td><div>
-							<form
-								action="#"
-								method="">
-								<input type="hidden" name=""
-									value="${pedidos.id}">
-								<button type="submit" class="btn btn-lg btn-danger btn-product">Devolver Pedido</button>
-							</form>
-						</div></td>
+						<td></td>
 						</tr>
 							</c:forEach>
 					</tbody>

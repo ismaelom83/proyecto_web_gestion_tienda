@@ -42,11 +42,11 @@ public class ControllerCliente  extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ClassLoader loader = Thread.currentThread().getContextClassLoader();
-    	URL appResourceURL = loader.getResource("log4java.properties");
-    	String dbConfigFileRoute = appResourceURL.getPath();
-    	
-		PropertyConfigurator.configure(dbConfigFileRoute);
+//		ClassLoader loader = Thread.currentThread().getContextClassLoader();
+//    	URL appResourceURL = loader.getResource("log4java.properties");
+//    	String dbConfigFileRoute = appResourceURL.getPath();
+//    	
+//		PropertyConfigurator.configure(dbConfigFileRoute);
 		HttpSession mySession = request.getSession(true);
 		ArrayList<Producto> aProductos2 ;
 		String categoria = request.getParameter("categoria");

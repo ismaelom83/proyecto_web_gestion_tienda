@@ -46,11 +46,11 @@ public class ControllerCarrito extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		ClassLoader loader = Thread.currentThread().getContextClassLoader();
-    	URL appResourceURL = loader.getResource("log4java.properties");
-    	String dbConfigFileRoute = appResourceURL.getPath();
-    	
-		PropertyConfigurator.configure(dbConfigFileRoute);
+//		ClassLoader loader = Thread.currentThread().getContextClassLoader();
+//    	URL appResourceURL = loader.getResource("log4java.properties");
+//    	String dbConfigFileRoute = appResourceURL.getPath();
+//    	
+//		PropertyConfigurator.configure(dbConfigFileRoute);
 		HttpSession mySession = request.getSession();
 		int sumaTotal = 0;
 		try {
@@ -128,6 +128,8 @@ public class ControllerCarrito extends HttpServlet {
    int sumaTotal=(int)mySession.getAttribute("sumaTotal");
 	Persona per=(Persona)mySession.getAttribute("personaCompleta");
 		OperacionesDB.insertCabeceraPedido(per.getId(),sumaTotal);
+		
+		System.out.println("esto es el id del cliente"+per.getId());
 		CabeceraPedido cabezera = new CabeceraPedido();
 		 cabezera = OperacionesDB.consultaUltimoIdCabecera();
 		for (Producto producto : listaFactuta) {

@@ -24,7 +24,7 @@ if (mySession.getAttribute("persona")==null) {
 	pageContext.setAttribute("misPedidos", cabeceraPedidos);
 	%>
 
-	<div class="container">
+	<div class="container" style="margin-top: 120px;">
 	<c:if test="${pageScope.misPedidos==null}">
 		<div class="row">
 			<div class="col-md-offset-1 col-md-10">

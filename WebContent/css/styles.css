@@ -510,10 +510,7 @@ footer{
     margin-bottom: 0;
 }
  
- footer{
- bottom: 0;
- position: fixed;
- }
+
 
 footer p a{
     color: #555;

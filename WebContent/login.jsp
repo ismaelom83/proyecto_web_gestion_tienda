@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -21,10 +21,10 @@
 		mySession.invalidate();
 	}
 	%>
-	
-	<%@include file="includes/nav.jsp" %>
 
-<div class="container">
+	<%@include file="includes/nav.jsp"%>
+
+	<div class="container">
 		<div id="loginbox" style="margin-top: 50px;"
 			class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 			<div class="panel panel-default">
@@ -42,7 +42,7 @@
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"><i
 								class="glyphicon glyphicon-user"></i></span> <input id="login-username"
-								type="text" class="form-control" name="email"
+								type="email" class="form-control" name="email"
 								placeholder="email">
 						</div>
 
@@ -66,8 +66,8 @@
 						<div class="form-group">
 							<div class="col-md-12 control">
 								<div style="border-top: 1px solid #888; padding-top: 15px;">
-									Todavia no tienes una cuenta de cliente? Puedes crearla ahora mismo <a
-										href="#"
+									Todavia no tienes una cuenta de cliente? Puedes crearla ahora
+									mismo <a href="#"
 										onClick="$('#loginbox').hide(); $('#signupbox').show()">
 										pulsando aqui! </a>
 								</div>
@@ -81,11 +81,11 @@
 			class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 			<div class="panel panel-danger">
 				<div class="panel-heading">
-					<div class="panel-title">Crear una nueva cuenta</div>
+					<div class="panel-title">Crear una nueva cuenta para cliente</div>
 				</div>
 				<div class="panel-body">
 					<form id="signupform" class="form-horizontal" role="form"
-						method="POST" enctype="multipart/form-data" action="login.jsp">
+						method="POST" action="ControllerRegistro">
 
 						<div id="signupalert" style="display: none"
 							class="alert alert-danger">
@@ -93,32 +93,66 @@
 							<span></span>
 						</div>
 						<div class="form-group">
-							<label for="email" class="col-md-3 control-label"  >Email</label>
-							<div class="col-md-9">
-								<input type="text" class="form-control" name="email"
-									placeholder="Email" required>
-							</div>
-						</div>
-
-						<div class="form-group">
 							<label for="nombre" class="col-md-3 control-label">Nombre</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" name="nombre"
+								<input type="text" class="form-control" required name="nombre"
 									placeholder="Nombre">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="apellidos" class="col-md-3 control-label">Apellidos</label>
+							<label for="apellidos" class="col-md-3 control-label">Apellido1</label>
 							<div class="col-md-9">
-								<input type="text" class="form-control" name="apellidos"
-									placeholder="Apellidos">
+								<input type="text" class="form-control" name="apellido1"
+									placeholder="Apellido1">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="password" class="col-md-3 control-label">Password</label>
+							<label for="apellidos" class="col-md-3 control-label">Apellido2</label>
 							<div class="col-md-9">
-								<input type="password" class="form-control" name="passwd"
+								<input type="text" class="form-control" name="apellido2"
+									placeholder="Apellido1">
+							</div>
+						</div>
+								<div class="form-group">
+							<label for="email" class="col-md-3 control-label">Email</label>
+							<div class="col-md-9">
+								<input type="email" class="form-control" name="email"
+									placeholder="Email" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="apellidos" class="col-md-3 control-label">DNI</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" name="dni"
+									placeholder="DNI">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="password"   class="col-md-3 control-label">Password</label>
+							<div class="col-md-9">
+								<input type="password" maxlength="5"  pattern="[0-9]{5}" class="form-control" name="password"
 									placeholder="Password">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="password" class="col-md-3 control-label">Edad</label>
+							<div class="col-md-9">
+								<input type="password" class="form-control" name="edad"
+									placeholder="Edad">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="password" class="col-md-3 control-label"></label>
+							<div class="col-md-9"> 
+								<input type="hidden" value="CN" class="form-control" name="tipo"
+									placeholder="Tipo persona">
+							</div>
+						</div>
+							<div class="form-group">
+							<label for="password" class="col-md-3 control-label"></label>
+							<div class="col-md-9">
+								<input type="hidden" class="form-control" value="0" name="baja"
+									placeholder="Baja">
 							</div>
 						</div>
 						<div class="form-group">
@@ -139,10 +173,10 @@
 	</div>
 	<br>
 	<br>
-	<%@include file="includes/footer.jsp" %>
+	<%@include file="includes/footer.jsp"%>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

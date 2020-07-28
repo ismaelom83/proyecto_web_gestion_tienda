@@ -509,6 +509,12 @@ footer{
 .footer p{
     margin-bottom: 0;
 }
+ 
+ footer{
+ bottom: 0;
+ position: fixed;
+ }
+
 footer p a{
     color: #555;
     font-weight: 400;

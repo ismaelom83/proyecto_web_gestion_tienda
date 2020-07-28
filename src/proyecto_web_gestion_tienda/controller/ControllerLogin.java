@@ -46,11 +46,11 @@ public class ControllerLogin extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		ClassLoader loader = Thread.currentThread().getContextClassLoader();
-    	URL appResourceURL = loader.getResource("log4java.properties");
-    	String dbConfigFileRoute = appResourceURL.getPath();
-    	
-		PropertyConfigurator.configure(dbConfigFileRoute);
+//		ClassLoader loader = Thread.currentThread().getContextClassLoader();
+//    	URL appResourceURL = loader.getResource("log4java.properties");
+//    	String dbConfigFileRoute = appResourceURL.getPath();
+//    	
+//		PropertyConfigurator.configure(dbConfigFileRoute);
 		ArrayList<Producto> aProducto;
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");

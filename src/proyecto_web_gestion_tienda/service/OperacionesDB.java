@@ -72,9 +72,10 @@ public class OperacionesDB {
 	}
 
 	public static Producto buscarProductoId(Session s, int id) {
-
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
 		String hQuery = "from Producto p " + " where p.id = :id";
-		Producto p = s.createQuery(hQuery, Producto.class).setParameter("id", id).setMaxResults(1).uniqueResult();
+		Producto p = session.createQuery(hQuery, Producto.class).setParameter("id", id).setMaxResults(1).uniqueResult();
 		if (p != null) {
 			System.out.println("poducto encontrado");
 			return p;
@@ -93,11 +94,13 @@ public class OperacionesDB {
 				.createQuery("UPDATE Producto p set p.stock=p.stock - '" + cantidad + "' where id='" + id + "'");
 		updateQuery.executeUpdate();
 		txn.commit();
+		
 
 	}
 
 	public static void insertCabeceraPedido(int id, int importe_total) {
-
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
 		Transaction txn = session.beginTransaction();
 		Query query = session.createNativeQuery("INSERT INTO cabecera_pedido  (id_cliente,importe_total) VALUES(?,?)");
 		query.setParameter(1, id);
@@ -108,6 +111,8 @@ public class OperacionesDB {
 	}
 
 	public static void insertDetallePedido(int idCabezera, int cabezera, int cantidad, int total) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
 		Transaction txn = session.beginTransaction();
 		Query query = session.createNativeQuery(
 				"INSERT INTO detalle_pedido  (id_pedido, id_producto,cantidad,total_linea) VALUES(?,?,?,?)");
@@ -121,6 +126,8 @@ public class OperacionesDB {
 	}
 
 	public static CabeceraPedido consultaUltimoIdCabecera() {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
 		Query query = session.createQuery("from CabeceraPedido order by id  DESC");
 		query.setMaxResults(1);
 		CabeceraPedido last = (CabeceraPedido) query.uniqueResult();
@@ -218,6 +225,8 @@ public class OperacionesDB {
 	
 	
 	public static void insertarMensajesDevolucion(int idDestinatario, int idOrigen,String adjunto, String asunto,String cuerpo,int leido,int contestado) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
 		Transaction txn = session.beginTransaction();
 		Query query = session.createNativeQuery(
 				"INSERT INTO mensajeria  (id_destinatario, id_origen,adjunto,asunto,cuerpo,leido,contestado) VALUES(?,?,?,?,?,?,?)");
@@ -271,6 +280,50 @@ public class OperacionesDB {
 		return null;
 	}
 	
+	
+	public static void registrarPersona(String nombre, String apellido1,String apellido2, String email,String dni,String password,String edad,String tipo,int baja) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction txn = session.beginTransaction();
+		Query query = session.createNativeQuery(
+				"INSERT INTO personas (nombre,apellido1,apellido2,mail,dni,pass,edad,tipo_persona,baja_logica) VALUES(?,?,?,?,?,?,?,?,?)");
+		query.setParameter(1, nombre);
+		query.setParameter(2, apellido1);
+		query.setParameter(3, apellido2);
+		query.setParameter(4, email);
+		query.setParameter(5, dni);
+		query.setParameter(6, password);
+		query.setParameter(7, edad);
+		query.setParameter(8, tipo);
+		query.setParameter(9, baja);
+		query.executeUpdate();
+		txn.commit();
+//		session.close();
+	}
+	
+	public static void registrarClientes(int idPersona,int puntos,float saldo,String categoria) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction txn = session.beginTransaction();
+		Query query = session.createNativeQuery(
+				"INSERT INTO clientes (id_persona, puntos,saldo,categoria) VALUES(?,?,?,?)");
+		query.setParameter(1, idPersona);
+		query.setParameter(2, puntos);
+		query.setParameter(3, saldo);
+		query.setParameter(4, categoria);
+		query.executeUpdate();
+		txn.commit();
+//		session.close();
+	}
+	
+	public static Persona consultaUltimaPersona() {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery("from Persona order by id  DESC");
+		query.setMaxResults(1);
+		Persona last = (Persona) query.uniqueResult();
+		return last;
+	}
 	
 
 }

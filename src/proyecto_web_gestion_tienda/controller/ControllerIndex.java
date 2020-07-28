@@ -49,11 +49,11 @@ public class ControllerIndex extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		ClassLoader loader = Thread.currentThread().getContextClassLoader();
-    	URL appResourceURL = loader.getResource("log4java.properties");
-    	String dbConfigFileRoute = appResourceURL.getPath();
-    	
-		PropertyConfigurator.configure(dbConfigFileRoute);
+//		ClassLoader loader = Thread.currentThread().getContextClassLoader();
+//    	URL appResourceURL = loader.getResource("log4java.properties");
+//    	String dbConfigFileRoute = appResourceURL.getPath();
+//    	
+//		PropertyConfigurator.configure(dbConfigFileRoute);
 		HttpSession mySession=request.getSession();
 		ArrayList<Producto> aProducto;		
 		aProducto = OperacionesDB.mostraTodoslosproductos();	

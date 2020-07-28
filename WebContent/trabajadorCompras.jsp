@@ -71,13 +71,15 @@ pageContext.setAttribute("lista", lista);
 		<button type="button" class="navbar-toggler" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false">
-			--> <span class="navbar-toggler-icon"></span>
+			 <span class="navbar-toggler-icon"></span>
 		</button>
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li><a class="nav-item active nav-link"
 					href="ControllerTrabajadorCompras">Volver</a></li>
+						<li><a class="nav-item active nav-link"
+					href="ControllerMostrarMensajes">Ver mensajes</a></li>
 			</ul>
 
 
@@ -140,11 +142,6 @@ pageContext.setAttribute("lista", lista);
 			</div>
 		</div>
 	</div>
-
-
-
-
-
 	<%@include file="includes/footer.jsp"%>
 </body>
 </html>

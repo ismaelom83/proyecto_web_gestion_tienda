@@ -22,9 +22,8 @@
 		HttpSession mySession = request.getSession();
 	ArrayList<Producto> listaP = (ArrayList<Producto>) mySession.getAttribute("productoCarritoLista");
 	pageContext.setAttribute("listaP", listaP);
-
 	%>
-	
+
 	<%@include file="includes/nav.jsp"%>
 
 	<div class="container">
@@ -70,7 +69,7 @@
 												value="${pro.precioUnitarioSinIva}"></c:out></strong>
 									<td class="text-left"><strong><c:out
 												value="${pro.cantidad}"></c:out></strong></td>
-								
+
 									<td class="col-md-1"><a
 										href="ControllerBorrarCarrito?idProductoBorrar=<c:out value="${pro.id}"></c:out>&cantidad=${pro.cantidad}"
 										class="btn btn-danger"> <span
@@ -88,14 +87,14 @@
 							</tr>
 							<tr>
 								<td> </td>
-								<td><a href="http://localhost:8080/proyecto_web_gestion_tienda/ControllerCliente" class="btn btn-default">
-										<span class="glyphicon glyphicon-shopping-cart"></span>
-										Continuar comprando
+								<td><a
+									href="http://localhost:8080/proyecto_web_gestion_tienda/ControllerCliente"
+									class="btn btn-default"> <span
+										class="glyphicon glyphicon-shopping-cart"></span> Continuar
+										comprando
 								</a></td>
 								<td>
-									<form
-										action="http://localhost:8080/proyecto_web_gestion_tienda/ControllerCarrito"
-										method="post">
+									<form action="ControllerCarrito" method="post">
 										<button type="submit" class="btn btn-success">FinalizarCompra</button>
 									</form>
 								</td>

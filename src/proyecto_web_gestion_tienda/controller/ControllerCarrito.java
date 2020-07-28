@@ -134,8 +134,6 @@ public class ControllerCarrito extends HttpServlet {
 			OperacionesDB.insertDetallePedido(cabezera.getId(),producto.getId(),producto.getCantidad(),producto.getPrecioUnitarioSinIva()*producto.getCantidad());
 		}
 	
-		
-	 
 			request.getRequestDispatcher("facturaCarrito.jsp").forward(request, response);
 
 		} else {

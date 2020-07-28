@@ -13,9 +13,8 @@
       <div class="col-md-4 mx-auto">
 
         <!-- Content -->
-        <h5 class="font-weight-bold text-uppercase mt-3 mb-1">Footer Content</h5>
-        <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
-          consectetur
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-1">Mas de nosotros</h5>
+        <p>Somo una tienda online conn todo tipo de productos tecnologicos.
           adipisicing elit.</p>
 
       </div>
@@ -27,20 +26,11 @@
       <div class="col-md-2 mx-auto">
 
         <!-- Links -->
-        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Privacidad</h5>
 
         <ul class="list-unstyled">
           <li>
-            <a href="#!">Link 1</a>
-          </li>
-          <li>
-            <a href="#!">Link 2</a>
-          </li>
-          <li>
-            <a href="#!">Link 3</a>
-          </li>
-          <li>
-            <a href="#!">Link 4</a>
+            <a href="#!">Politica de cookies</a>
           </li>
         </ul>
 
@@ -53,20 +43,11 @@
       <div class="col-md-2 mx-auto">
 
         <!-- Links -->
-        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Quienes somos</h5>
 
         <ul class="list-unstyled">
           <li>
-            <a href="#!">Link 1</a>
-          </li>
-          <li>
-            <a href="#!">Link 2</a>
-          </li>
-          <li>
-            <a href="#!">Link 3</a>
-          </li>
-          <li>
-            <a href="#!">Link 4</a>
+            <a href="#!">Saber mas</a>
           </li>
         </ul>
 
@@ -79,20 +60,11 @@
       <div class="col-md-2 mx-auto">
 
         <!-- Links -->
-        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">La Empresa</h5>
 
         <ul class="list-unstyled">
           <li>
-            <a href="#!">Link 1</a>
-          </li>
-          <li>
-            <a href="#!">Link 2</a>
-          </li>
-          <li>
-            <a href="#!">Link 3</a>
-          </li>
-          <li>
-            <a href="#!">Link 4</a>
+            <a href="#!">Nuestro compromiso</a>
           </li>
         </ul>
 
@@ -109,7 +81,7 @@
 
   <hr>
 
-<!--   <!-- Social buttons --> -->
+<!--   <!-- Social buttons -->
 <!--   <ul class="list-unstyled list-inline text-center"> -->
 <!--     <li class="list-inline-item"> -->
 <!--       <a class="btn-floating btn-fb mx-1"> -->

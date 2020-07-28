@@ -39,7 +39,7 @@
 					<br>
 					<div class="pull-right">
 						<h4>
-							<strong>Precio:  ${productoId.precioUnitarioSinIva} </strong>
+							<strong>Precio:  ${productoId.precioUnitarioSinIva} euros</strong>
 						</h4>
 					</div>
 					<c:if test="${sessionScope.persona!=null}">
